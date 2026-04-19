@@ -68,7 +68,7 @@ Read all inputs appropriate to the mode:
 - All files in `docs/engine-reference/[engine]/modules/`
 
 ### Project Standards
-- `.claude/docs/technical-preferences.md`
+- `docs/project/technical-preferences.md` (or `.claude/docs/technical-preferences.md` as a Claude mirror in legacy Claude-only repos)
 
 Report a count: "Loaded [N] GDDs, [M] ADRs, engine: [name + version]."
 
@@ -324,7 +324,7 @@ Post-Cutoff API Conflicts:
 ### Engine Specialist Consultation
 
 After completing the engine audit above, spawn the **primary engine specialist** via Task for a domain-expert second opinion:
-- Read `.claude/docs/technical-preferences.md` `Engine Specialists` section to get the primary specialist
+- Read `docs/project/technical-preferences.md` `Engine Specialists` section to get the primary specialist. If it is missing in a legacy Claude-only repo, fall back to `.claude/docs/technical-preferences.md`.
 - If no engine is configured, skip this consultation
 - Spawn `subagent_type: [primary specialist]` with: all ADRs that contain engine-specific decisions or `Post-Cutoff APIs Used` fields, the engine reference docs, and the Phase 5 audit findings. Ask them to:
   1. Confirm or challenge each audit finding — specialists may know of engine nuances not captured in the reference docs

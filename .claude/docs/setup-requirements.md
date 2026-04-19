@@ -1,7 +1,7 @@
 # Setup Requirements
 
 This template requires a few tools to be installed for full functionality.
-All hooks fail gracefully if tools are missing — nothing will break, but
+Claude-specific hooks fail gracefully if tools are missing — nothing will break, but
 you'll lose validation features.
 
 ## Required
@@ -9,14 +9,21 @@ you'll lose validation features.
 | Tool | Purpose | Install |
 | ---- | ---- | ---- |
 | **Git** | Version control, branch management | [git-scm.com](https://git-scm.com/) |
-| **Claude Code** | AI agent CLI | `npm install -g @anthropic-ai/claude-code` |
+| **Claude Code** | Claude adapter runtime | `npm install -g @anthropic-ai/claude-code` |
+
+Non-Claude agents should start from `AGENTS.md` and `docs/project/` instead of
+depending on `.claude/`.
+
+For shared configuration, prefer the canonical files in `docs/project/`.
+The Claude adapter keeps compatibility mirrors such as `.claude/docs/workflow-catalog.yaml`
+and `.claude/docs/technical-preferences.md` for Claude-specific consumers.
 
 ## Recommended
 
 | Tool | Used By | Purpose | Install |
 | ---- | ---- | ---- | ---- |
-| **jq** | Hooks (4 of 8) | JSON parsing in commit/push/asset/agent hooks | See below |
-| **Python 3** | Hooks (2 of 8) | JSON validation for data files | [python.org](https://www.python.org/) |
+| **jq** | Claude hook scripts | JSON parsing in commit/push/asset/agent hooks | See below |
+| **Python 3** | Claude hook scripts | JSON validation for data files | [python.org](https://www.python.org/) |
 | **Bash** | All hooks | Shell script execution | Included with Git for Windows |
 
 ### Installing jq
@@ -46,8 +53,8 @@ sudo pacman -S jq       # Arch
 - Git for Windows includes **Git Bash**, which provides the `bash` command
   used by all hooks in `settings.json`
 - Ensure Git Bash is on your PATH (default if installed via the Git installer)
-- Hooks use `bash .claude/hooks/[name].sh` — this works on Windows because
-  Claude Code invokes commands through a shell that can find `bash.exe`
+- Claude adapter hooks use `bash .claude/hooks/[name].sh` — this works on Windows
+  because Claude Code invokes commands through a shell that can find `bash.exe`
 
 ### macOS / Linux
 - Bash is available natively
@@ -72,9 +79,12 @@ python3 --version      # Should show python version (optional)
 | **Python 3** | JSON data file validation in commit and asset hooks is skipped. Invalid JSON can be committed without warning. |
 | **Both** | All hooks still execute without error (exit 0) but provide no validation. You're flying without safety nets. |
 
-## Recommended IDE
+## Recommended IDEs / Runtimes
 
-Claude Code works with any editor, but the template is optimized for:
+Claude Code works with any editor, but the bundled Claude adapter is optimized for:
 - **VS Code** with the Claude Code extension
 - **Cursor** (Claude Code compatible)
 - Terminal-based Claude Code CLI
+
+For other agent runtimes, prefer whatever environment can read `AGENTS.md` and
+follow the shared docs in `docs/project/`.

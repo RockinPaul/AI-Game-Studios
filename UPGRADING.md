@@ -46,9 +46,11 @@ Git will flag conflicts only in files that both the template *and* you have
 changed. Resolve each one — your game content goes in, structural improvements
 come along for the ride. Then commit the merge.
 
-**Tip:** The files most likely to conflict are `CLAUDE.md` and
-`.claude/docs/technical-preferences.md`, because you've filled them in with
-your engine and project settings. Keep your content; accept the structural changes.
+**Tip:** The files most likely to conflict are `CLAUDE.md`,
+`docs/project/technical-preferences.md`, and `.claude/docs/technical-preferences.md`,
+because you've filled them in with your engine and project settings. Keep your
+project-specific content; accept the structural changes and keep the Claude mirror
+aligned with the canonical `docs/project` file.
 
 ---
 
@@ -78,6 +80,18 @@ Best when: you didn't use git to set up the template (just downloaded a zip).
 3. For files under **"Merge carefully"**, open both versions side-by-side
    and manually merge the structural changes while keeping your content.
 
+### Neutral Core Migration Note
+
+Recent template versions introduce a neutral shared-doc layer under
+`docs/project/` while keeping `.claude/` as the Claude adapter.
+
+When upgrading an existing repo:
+
+1. Treat `docs/project/technical-preferences.md` as the new canonical location.
+2. Keep `.claude/docs/technical-preferences.md` in sync as a Claude-compatibility mirror until all Claude skills are retargeted.
+3. Prefer `docs/project/workflow-catalog.yaml` as canonical, with `.claude/docs/workflow-catalog.yaml` kept as the adapter mirror.
+4. If your repo only has the older `.claude/docs/*` files populated, create the new `docs/project/*` copies before relying on the neutral-core entrypoints.
+
 ---
 
 ## v0.4.1
@@ -89,15 +103,15 @@ Best when: you didn't use git to set up the template (just downloaded a zip).
 
 | Category | Changes |
 |----------|---------|
-| **New skill** | `/art-bible` — guided section-by-section visual identity authoring (9 sections). Mandatory art-director Task spawn per section. AD-ART-BIBLE sign-off gate. Required at Technical Setup phase. |
+| **New skill** | `/art-bible` — guided section-by-section visual identity authoring (9 sections). Mandatory art-director Task spawn per section. AD-ART-BIBLE sign-off gate. Required in the Concept phase before systems design. |
 | **New skill** | `/asset-spec` — per-asset visual spec and AI generation prompt generator. Reads art bible + GDD/level/character docs. Writes `design/assets/specs/` files and `design/assets/asset-manifest.md`. Full/lean/solo modes. |
 | **New director gates (3)** | `AD-CONCEPT-VISUAL` (brainstorm Phase 4), `AD-ART-BIBLE` (art bible sign-off), `AD-PHASE-GATE` (gate-check panel) |
 | **`/brainstorm` update** | Added `Task` to allowed-tools (was missing — blocked all director spawning). Art-director now spawns in parallel with creative-director after pillars lock. Visual Identity Anchor written to game-concept.md. |
-| **`/gate-check` update** | Art-director added as 4th parallel director (AD-PHASE-GATE). Visual artifact checks: Visual Identity Anchor (Concept gate), art bible (Technical Setup gate), AD-ART-BIBLE sign-off + character visual profiles (Pre-Production gate). |
+| **`/gate-check` update** | Art-director added as 4th parallel director (AD-PHASE-GATE). Visual artifact checks: Visual Identity Anchor (Concept gate), art bible (Concept gate), AD-ART-BIBLE sign-off + character visual profiles (Pre-Production gate). |
 | **`/team-level` update** | Art-director added to Step 1 parallel spawn (visual direction before layout). Level-designer now receives art-director targets as explicit constraints. Step 4 art-director role corrected to production-concepts only. |
 | **`/team-narrative` update** | Art-director added to Phase 2 parallel spawn (character visual design, environmental storytelling, cinematic tone). |
 | **`/design-system` update** | Routing table expanded with art-director + technical-artist for Combat, UI, Dialogue, Animation/VFX, Character categories. Visual/Audio section now mandatory (with art-director Task spawn) for 7 system categories. |
-| **`workflow-catalog.yaml`** | `/art-bible` added to Technical Setup (required). `/asset-spec` added to Pre-Production (optional, repeatable). |
+| **Workflow catalogs** | Canonical `docs/project/workflow-catalog.yaml` and Claude mirror `.claude/docs/workflow-catalog.yaml` now include `/art-bible` in Concept (required) and `/asset-spec` in Pre-Production (optional, repeatable). |
 
 ### Files: Safe to Overwrite
 
@@ -116,6 +130,7 @@ Best when: you didn't use git to set up the template (just downloaded a zip).
 .claude/skills/team-narrative/SKILL.md
 .claude/skills/design-system/SKILL.md
 .claude/docs/workflow-catalog.yaml
+docs/project/workflow-catalog.yaml
 README.md
 UPGRADING.md
 ```

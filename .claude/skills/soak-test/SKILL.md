@@ -52,8 +52,8 @@ human does the actual playing.**
 ## 2. Load Context
 
 Read:
-- `.claude/docs/technical-preferences.md` — engine (for engine-specific memory
-  monitoring guidance), performance budgets (memory ceiling, target FPS)
+- `docs/project/technical-preferences.md` — engine (for engine-specific memory
+  monitoring guidance), performance budgets (memory ceiling, target FPS). If it is missing in a legacy Claude-only repo, fall back to `.claude/docs/technical-preferences.md`.
 - `design/gdd/game-concept.md` — intended session length (for comparison against
   soak duration), core loop description
 - Most recent file in `production/playtests/` — prior playtest findings

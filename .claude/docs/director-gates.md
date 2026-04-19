@@ -1,8 +1,9 @@
-# Director Gates — Shared Review Pattern
+# Director Gates — Claude Adapter Review Pattern
 
 This document defines the standard gate prompts for all director and lead reviews
 across every workflow stage. Skills reference gate IDs from this document instead
 of embedding full prompts inline — eliminating drift when prompts need updating.
+It is part of the Claude adapter, not the neutral-core source of truth.
 
 **Scope**: All 7 production stages (Concept → Release), all 3 Tier 1 directors,
 all key Tier 2 leads. Any skill, team orchestrator, or workflow may invoke these gates.
@@ -573,7 +574,7 @@ Agent: `art-director` | Model tier: Sonnet | Domain: Visual identity, art bible,
 **Context to pass**:
 - Art bible path (`design/art/art-bible.md`)
 - Game pillars and core fantasy
-- Platform and performance constraints (from `.claude/docs/technical-preferences.md` if configured)
+- Platform and performance constraints (from `docs/project/technical-preferences.md` if configured, otherwise `.claude/docs/technical-preferences.md` in legacy repos)
 - Visual identity anchor chosen during brainstorm (from `design/gdd/game-concept.md`)
 
 **Prompt**:
@@ -744,7 +745,7 @@ authored, or when a design decision has narrative implications
 introduced, or when a tech art decision affects visual style
 
 **Context to pass**:
-- Art bible path (if exists at `design/art-bible.md`)
+- Art bible path (if exists at `design/art/art-bible.md`)
 - The specific asset type, style decision, or visual direction being reviewed
 - Reference images or style descriptions
 - Platform and performance constraints

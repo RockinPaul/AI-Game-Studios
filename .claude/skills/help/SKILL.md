@@ -21,9 +21,10 @@ gap analysis, use `/project-stage-detect`.
 
 ## Step 1: Read the Catalog
 
-Read `.claude/docs/workflow-catalog.yaml`. This is the authoritative list of all
-phases, their steps (in order), whether each step is required or optional, and
-the artifact globs that indicate completion.
+Read `docs/project/workflow-catalog.yaml`. If it does not exist yet in an older
+project, fall back to `.claude/docs/workflow-catalog.yaml`. The neutral file is
+the canonical list of all phases, their steps (in order), whether each step is
+required or optional, and the artifact globs that indicate completion.
 
 ---
 

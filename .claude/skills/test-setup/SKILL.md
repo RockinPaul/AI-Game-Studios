@@ -24,7 +24,7 @@ A test framework installed at sprint four costs 3 sprints.
 ## Phase 1: Detect Engine and Existing State
 
 1. **Read engine config**:
-   - Read `.claude/docs/technical-preferences.md` and extract the `Engine:` value.
+   - Read `docs/project/technical-preferences.md` and extract the `Engine:` value. If it does not exist yet in a legacy Claude-only repo, fall back to `.claude/docs/technical-preferences.md`.
    - If engine is not configured (`[TO BE CONFIGURED]`), stop:
      "Engine not configured. Run `/setup-engine` first, then re-run `/test-setup`."
 

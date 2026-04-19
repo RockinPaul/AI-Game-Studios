@@ -3,13 +3,20 @@
 ## What Is This?
 
 This is a complete Claude Code agent architecture for game development. It
-organizes 48 specialized AI agents into a studio hierarchy that mirrors
+organizes 49 specialized AI agents into a studio hierarchy that mirrors
 real game development teams, with defined responsibilities, delegation
 rules, and coordination protocols. It includes engine-specialist agents
 for Godot, Unity, and Unreal — each with dedicated sub-specialists for
 major engine subsystems. All design agents and templates are grounded in
 established game design theory (MDA Framework, Self-Determination Theory,
 Flow State, Bartle Player Types). Use whichever engine set matches your project.
+
+The shared project core now lives in `docs/project/`. Treat this file and the
+rest of `.claude/` as the Claude adapter layer. `docs/project/workflow-catalog.yaml`
+is the canonical workflow catalog, with `.claude/docs/workflow-catalog.yaml` as the
+Claude mirror. `docs/project/technical-preferences.md` is the canonical technical
+preferences file, with `.claude/docs/technical-preferences.md` as the Claude
+compatibility mirror.
 
 ## How to Use
 
@@ -72,6 +79,10 @@ Ask yourself: "What department would handle this in a real studio?"
 | Brainstorm a new game idea | Use `/brainstorm` skill |
 
 ### 3. Use Slash Commands for Common Tasks
+
+These slash commands are Claude adapter entrypoints into the workflow. The
+neutral workflow authority now lives in `docs/project/workflow-catalog.yaml` and
+`docs/project/workflow-overview.md`.
 
 | Command | What it does |
 |---------|-------------|
@@ -211,8 +222,8 @@ If you already know what you need, jump directly to the relevant path:
    - Produces a game concept document and recommends an engine
 2. **Set up the engine** — Run `/setup-engine` (uses the brainstorm recommendation)
    - Configures CLAUDE.md, detects knowledge gaps, populates reference docs
-   - Creates `.claude/docs/technical-preferences.md` with naming conventions,
-     performance budgets, and engine-specific defaults
+   - Populates `docs/project/technical-preferences.md` with naming conventions,
+      performance budgets, and engine-specific defaults
    - If the engine version is newer than the LLM's training data, it fetches
      current docs from the web so agents suggest correct APIs
 3. **Validate the concept** — Run `/design-review design/gdd/game-concept.md`
@@ -263,22 +274,24 @@ If you have design docs, prototypes, or code already:
 ## File Structure Reference
 
 ```
-CLAUDE.md                          -- Master config (read this first, ~60 lines)
+AGENTS.md                          -- Neutral agent entrypoint
+CLAUDE.md                          -- Claude adapter entrypoint
 .claude/
   settings.json                    -- Claude Code hooks and project settings
-  agents/                          -- 48 agent definitions (YAML frontmatter)
-  skills/                          -- 68 slash command definitions (YAML frontmatter)
+  agents/                          -- 49 agent definitions (YAML frontmatter)
+  skills/                          -- 72 slash command definitions (YAML frontmatter)
   hooks/                           -- 12 hook scripts (.sh) wired by settings.json
   rules/                           -- 11 path-specific rule files
   docs/
     quick-start.md                 -- This file
-    technical-preferences.md       -- Project-specific standards (populated by /setup-engine)
-    coding-standards.md            -- Coding and design doc standards
-    coordination-rules.md          -- Agent coordination rules
-    context-management.md          -- Context budgets and compaction instructions
-    directory-structure.md         -- Project directory layout
-    workflow-catalog.yaml          -- 7-phase pipeline definition (read by /help)
+    technical-preferences.md       -- Claude compatibility mirror of docs/project/technical-preferences.md
+    coding-standards.md            -- Claude adapter notes for shared standards
+    coordination-rules.md          -- Claude adapter notes for shared coordination rules
+    context-management.md          -- Claude adapter notes for shared context policy
+    directory-structure.md         -- Claude adapter view of project layout
+    workflow-catalog.yaml          -- Claude mirror of docs/project/workflow-catalog.yaml
     setup-requirements.md          -- System prerequisites (Git Bash, jq, Python)
     settings-local-template.md     -- Personal settings.local.json guide
-    templates/                     -- 37 document templates
+    templates/                     -- 38 document templates
+docs/project/                      -- Neutral shared project guidance and canonical workflow docs
 ```

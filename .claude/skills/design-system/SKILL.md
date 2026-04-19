@@ -160,7 +160,7 @@ Map the system's category (from systems-index.md) to an engine domain:
 | Dialogue, quests, narrative | Scripting |
 
 **Step 2 — Read engine context (if available):**
-- Read `.claude/docs/technical-preferences.md` to identify the engine and version
+- Read `docs/project/technical-preferences.md` to identify the engine and version. If it is missing in a legacy Claude-only repo, fall back to `.claude/docs/technical-preferences.md`.
 - If engine is configured, read `docs/engine-reference/[engine]/VERSION.md`
 - Read `docs/engine-reference/[engine]/modules/[domain].md` if it exists
 - Read `docs/engine-reference/[engine]/breaking-changes.md` for domain-relevant entries

@@ -40,7 +40,7 @@ with verdict COMPLETE / BLOCKED and handoffs to `/ux-review`, `/code-review`,
 - `design/player-journey.md` exists
 - `design/ux/interaction-patterns.md` exists with relevant patterns
 - `design/accessibility-requirements.md` exists with committed tier (e.g., Enhanced)
-- Engine UI specialist configured in `.claude/docs/technical-preferences.md`
+- Engine UI specialist configured in canonical `docs/project/technical-preferences.md` or the `.claude/docs/technical-preferences.md` mirror
 
 **Input:** `/team-ui inventory screen`
 
@@ -49,7 +49,7 @@ with verdict COMPLETE / BLOCKED and handoffs to `/ux-review`, `/code-review`,
 2. Phase 1b — `/ux-design inventory-screen` invoked (or ux-designer spawned directly); produces `design/ux/inventory-screen.md` using `ux-spec.md` template; `AskUserQuestion` confirms spec before review
 3. Phase 1c — `/ux-review design/ux/inventory-screen.md` invoked; returns APPROVED; gate passed, proceed to Phase 2
 4. Phase 2 — art-director spawned; reviews full UX spec (not only wireframes); applies visual treatment; verifies color contrast; produces visual design spec with asset manifest; `AskUserQuestion` confirms before Phase 3
-5. Phase 3 — engine UI specialist spawned first (read from technical-preferences.md); produces implementation notes for ui-programmer; ui-programmer spawned with UX spec + visual spec + engine notes; implementation produced; interaction-patterns.md updated if new patterns introduced
+5. Phase 3 — engine UI specialist spawned first (read from canonical `docs/project/technical-preferences.md`, or `.claude/docs/technical-preferences.md` as mirror/fallback); produces implementation notes for ui-programmer; ui-programmer spawned with UX spec + visual spec + engine notes; implementation produced; interaction-patterns.md updated if new patterns introduced
 6. Phase 4 — ux-designer, art-director, accessibility-specialist spawned in parallel; all three return results before Phase 5
 7. Phase 5 — review feedback addressed; animations verified skippable; UI sounds confirmed through audio event system; interaction-patterns.md final check; verdict: COMPLETE
 8. Summary report: UX spec APPROVED, visual design COMPLETE, implementation COMPLETE, accessibility COMPLIANT, all input methods supported, pattern library updated, verdict: COMPLETE

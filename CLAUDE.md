@@ -1,7 +1,10 @@
-# Claude Code Game Studios -- Game Studio Agent Architecture
+# Claude Adapter -- Game Studios Template
 
-Indie game development managed through 48 coordinated Claude Code subagents.
-Each agent owns a specific domain, enforcing separation of concerns and quality.
+This file is the Claude-specific entrypoint for the Game Studios template.
+
+The shared, runtime-neutral project guidance now lives in `docs/project/`.
+Use that as the system's core documentation. Treat `.claude/` as the Claude
+adapter layer.
 
 ## Technology Stack
 
@@ -16,7 +19,7 @@ Each agent owns a specific domain, enforcing separation of concerns and quality.
 
 ## Project Structure
 
-@.claude/docs/directory-structure.md
+@docs/project/directory-structure.md
 
 ## Engine Version Reference
 
@@ -24,11 +27,11 @@ Each agent owns a specific domain, enforcing separation of concerns and quality.
 
 ## Technical Preferences
 
-@.claude/docs/technical-preferences.md
+@docs/project/technical-preferences.md
 
 ## Coordination Rules
 
-@.claude/docs/coordination-rules.md
+@docs/project/coordination-rules.md
 
 ## Collaboration Protocol
 
@@ -42,13 +45,13 @@ Every task follows: **Question -> Options -> Decision -> Draft -> Approval**
 
 See `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md` for full protocol and examples.
 
-> **First session?** If the project has no engine configured and no game concept,
-> run `/start` to begin the guided onboarding flow.
+> **First session in Claude Code?** If the project has no engine configured and no
+> game concept, run `/start` to begin the guided onboarding flow.
 
 ## Coding Standards
 
-@.claude/docs/coding-standards.md
+@docs/project/coding-standards.md
 
 ## Context Management
 
-@.claude/docs/context-management.md
+@docs/project/context-management.md

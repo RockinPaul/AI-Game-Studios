@@ -15,6 +15,7 @@ else
   model=$(echo "$input" | grep -oE '"display_name"\s*:\s*"[^"]*"' | head -1 | sed 's/.*: *"//;s/"//')
   used_pct=$(echo "$input" | grep -oE '"used_percentage"\s*:\s*[0-9]+' | head -1 | sed 's/.*: *//')
   cwd=$(echo "$input" | grep -oE '"current_dir"\s*:\s*"[^"]*"' | head -1 | sed 's/.*: *"//;s/"//')
+  [ -z "$cwd" ] && cwd=$(echo "$input" | grep -oE '"cwd"\s*:\s*"[^"]*"' | head -1 | sed 's/.*: *"//;s/"//')
   [ -z "$model" ] && model="Unknown"
 fi
 
@@ -41,7 +42,10 @@ fi
 if [ -z "$stage" ]; then
   concept_file="$cwd/design/gdd/game-concept.md"
   systems_file="$cwd/design/gdd/systems-index.md"
-  tech_prefs="$cwd/.claude/docs/technical-preferences.md"
+  tech_prefs="$cwd/docs/project/technical-preferences.md"
+  if [ ! -f "$tech_prefs" ]; then
+    tech_prefs="$cwd/.claude/docs/technical-preferences.md"
+  fi
 
   has_concept=false
   has_systems=false
@@ -53,7 +57,7 @@ if [ -z "$stage" ]; then
 
   # Check if engine is configured (not placeholder)
   if [ -f "$tech_prefs" ]; then
-    engine_line=$(grep -m1 '^\*\*Engine\*\*:' "$tech_prefs" 2>/dev/null || true)
+    engine_line=$(grep -m1 '^- \*\*Engine\*\*:' "$tech_prefs" 2>/dev/null || true)
     if [ -n "$engine_line" ] && ! echo "$engine_line" | grep -q "TO BE CONFIGURED"; then
       engine_configured=true
     fi
@@ -61,7 +65,7 @@ if [ -z "$stage" ]; then
 
   # Count source files (language-agnostic)
   if [ -d "$cwd/src" ]; then
-    src_count=$(find "$cwd/src" -type f \( -name "*.gd" -o -name "*.cs" -o -name "*.cpp" -o -name "*.h" -o -name "*.py" -o -name "*.rs" -o -name "*.lua" -o -name "*.tscn" -o -name "*.tres" \) 2>/dev/null | wc -l | tr -d ' ')
+    src_count=$(find "$cwd/src" -type f \( -name "*.gd" -o -name "*.cs" -o -name "*.cpp" -o -name "*.c" -o -name "*.h" -o -name "*.hpp" -o -name "*.py" -o -name "*.rs" -o -name "*.lua" -o -name "*.js" -o -name "*.ts" \) 2>/dev/null | wc -l | tr -d ' ')
   fi
 
   # Check for ADRs (signals Pre-Production phase)

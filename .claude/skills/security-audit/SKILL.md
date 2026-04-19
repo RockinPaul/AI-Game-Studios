@@ -35,7 +35,7 @@ remediation plan.
 - `quick` — high-severity checks only (fastest, for iterative use)
 - No argument — run `full`
 
-Read `.claude/docs/technical-preferences.md` to determine:
+Read `docs/project/technical-preferences.md` to determine the following. If it is missing in a legacy Claude-only repo, fall back to `.claude/docs/technical-preferences.md`:
 - Engine and language (affects which patterns to search for)
 - Target platforms (affects which attack surfaces apply)
 - Whether multiplayer/networking is in scope

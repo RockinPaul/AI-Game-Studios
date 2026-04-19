@@ -46,8 +46,10 @@ full detail for each.
 
 Before validating any spec, load:
 
-1. **Input & Platform config**: Read `.claude/docs/technical-preferences.md` and
-   extract `## Input & Platform`. This is the authoritative source for which input
+1. **Input & Platform config**: Read `docs/project/technical-preferences.md` and
+   extract `## Input & Platform`. If that file does not exist yet in an older
+   repo, fall back to `.claude/docs/technical-preferences.md`. The resolved
+   technical preferences file is the authoritative source for which input
    methods the game supports — use it to drive the Input Method Coverage checks in
    Phase 3A, not the spec's own header. If unconfigured, fall back to the spec header.
 2. The accessibility tier committed to in `design/accessibility-requirements.md`

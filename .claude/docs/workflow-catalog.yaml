@@ -1,4 +1,7 @@
 # Workflow Catalog
+# Claude adapter mirror of the canonical neutral catalog at:
+# `docs/project/workflow-catalog.yaml`
+#
 # Used by /help to determine where a user is and what comes next.
 #
 # Artifact checks:
@@ -27,15 +30,6 @@ phases:
         required: false
         description: "Explore the game concept using MDA, verb-first, and player psychology frameworks"
 
-      - id: engine-setup
-        name: "Engine Setup"
-        command: /setup-engine
-        required: true
-        artifact:
-          glob: ".claude/docs/technical-preferences.md"
-          pattern: "Engine: [^[]"
-        description: "Configure engine, pin version, set naming conventions and performance budgets"
-
       - id: game-concept
         name: "Game Concept Document"
         command: /brainstorm
@@ -49,6 +43,15 @@ phases:
         command: /design-review
         required: false
         description: "Validate the game concept (recommended before proceeding)"
+
+      - id: engine-setup
+        name: "Engine Setup"
+        command: /setup-engine
+        required: true
+        artifact:
+          glob: "docs/project/technical-preferences.md"
+          pattern: '- \*\*Engine\*\*: [^[]'
+        description: "Configure engine, pin version, set naming conventions and performance budgets"
 
       - id: art-bible
         name: "Art Bible"
@@ -231,7 +234,7 @@ phases:
         artifact:
           glob: "production/playtests/*.md"
           min_count: 1
-        description: "Document vertical slice playtest sessions using /playtest-report. Run at least once here (≥1 session required before Production; ≥3 required before Polish). Each session should cover one complete run-through of the core loop."
+        description: "Document vertical slice playtest sessions using /playtest-report. Run at least once here (>=1 session required before Production; >=3 required before Polish). Each session should cover one complete run-through of the core loop."
 
   production:
     label: "Production"
@@ -343,7 +346,7 @@ phases:
         description: "Verify naming conventions, file format standards, and size budgets"
 
       - id: playtest-polish
-        name: "Playtest Sessions (×3)"
+        name: "Playtest Sessions (x3)"
         command: /playtest-report
         required: true
         artifact:

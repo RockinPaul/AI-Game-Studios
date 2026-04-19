@@ -1,7 +1,7 @@
 # Technical Preferences
 
-<!-- Populated by /setup-engine. Updated as the user makes decisions throughout development. -->
-<!-- All agents reference this file for project-specific standards and conventions. -->
+<!-- Claude compatibility mirror of the canonical docs/project/technical-preferences.md. -->
+<!-- Populated by /setup-engine for Claude-specific consumers until all consumers are retargeted. -->
 
 ## Engine & Language
 

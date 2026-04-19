@@ -90,8 +90,9 @@ must satisfy the accessibility tier committed to there.
 
 ### 2h: Input Method (from Project Config)
 
-Read `.claude/docs/technical-preferences.md` and extract the `## Input & Platform`
-section. Store these values for use throughout the skill — they drive the
+Read `docs/project/technical-preferences.md` and extract the `## Input & Platform`
+section. If that file does not exist yet in an older repo, fall back to
+`.claude/docs/technical-preferences.md`. Store these values for use throughout the skill — they drive the
 Interaction Map and inform accessibility requirements:
 
 - **Input Methods** — e.g., Keyboard/Mouse, Gamepad, Touch, Mixed

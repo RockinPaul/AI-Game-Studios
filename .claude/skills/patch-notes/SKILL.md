@@ -40,8 +40,8 @@ Verdict: **BLOCKED** — stop here without generating notes.
 
 **Tone guide detection** — before drafting notes, check for writing style guidance:
 
-1. Check `.claude/docs/technical-preferences.md` for any "tone", "voice", or "style"
-   fields or sections.
+1. Check `docs/project/technical-preferences.md` for any "tone", "voice", or "style"
+   fields or sections. If it is missing in a legacy Claude-only repo, check `.claude/docs/technical-preferences.md` as the Claude mirror.
 2. Check `docs/PATCH-NOTES-STYLE.md` if it exists.
 3. Check `design/community/tone-guide.md` if it exists.
 4. If any source contains tone/voice/style instructions, extract them and apply

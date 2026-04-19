@@ -2,8 +2,11 @@
 
 ```text
 /
-├── CLAUDE.md                    # Master configuration
-├── .claude/                     # Agent definitions, skills, hooks, rules, docs
+├── AGENTS.md                    # Neutral agent entrypoint
+├── CLAUDE.md                    # Claude adapter entrypoint
+├── .claude/                     # Claude-specific adapter assets and compatibility mirrors
+├── docs/project/                # Neutral shared project guidance and canonical workflow/config docs
+├── docs/platforms/              # Runtime support and adapter docs
 ├── src/                         # Game source code (core, gameplay, ai, networking, ui, tools)
 ├── assets/                      # Game assets (art, audio, vfx, shaders, data)
 ├── design/                      # Game design documents (gdd, narrative, levels, balance)

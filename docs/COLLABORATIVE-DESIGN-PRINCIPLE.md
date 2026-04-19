@@ -331,6 +331,12 @@ Skill: "Writing design/concept.md..."
 
 ## 🎛️ Structured Decision UI (AskUserQuestion)
 
+`AskUserQuestion` is a Claude-adapter mechanism, not the neutral-core default.
+Use it when you are operating inside Claude Code and want a structured picker UI.
+In runtime-neutral workflows, treat the core pattern here as explain the trade-offs,
+capture the user's decision, then continue using whatever interaction mechanism the
+current runtime actually provides.
+
 Use the `AskUserQuestion` tool to present decisions as a **selectable UI** instead
 of plain markdown text. This gives the user a clean interface to pick from options
 (or type "Other" for a custom answer).

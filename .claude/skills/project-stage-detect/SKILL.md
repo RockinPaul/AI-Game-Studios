@@ -65,10 +65,10 @@ auto-detect using these heuristics (check from most-advanced backward):
 
 | Stage | Indicators |
 |-------|-----------|
-| **Concept** | No game concept doc, brainstorming phase |
-| **Systems Design** | Game concept exists, systems index missing or incomplete |
-| **Technical Setup** | Systems index exists, engine not configured |
-| **Pre-Production** | Engine configured, `src/` has <10 source files |
+| **Concept** | No game concept doc, or concept work not yet completed |
+| **Systems Design** | Game concept exists and systems index exists, but system GDDs are still being authored/reviewed |
+| **Technical Setup** | Systems Design artifacts exist and architecture/ADR work is underway |
+| **Pre-Production** | Architecture baseline exists, stories/UX/prototype planning is underway, `src/` has <10 source files |
 | **Production** | `src/` has 10+ source files, active development |
 | **Polish** | Explicit only (set by `/gate-check` Production → Polish gate) |
 | **Release** | Explicit only (set by `/gate-check` Polish → Release gate) |

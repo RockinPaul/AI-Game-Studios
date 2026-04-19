@@ -1,14 +1,16 @@
-# Claude Code Game Studios -- Complete Workflow Guide
+# Game Studios Template -- Complete Workflow Guide
 
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
-> 48-agent system, 68 slash commands, and 12 automated hooks. It assumes you
-> have Claude Code installed and are working from the project root.
+> template's multi-role workflow. The shared project rules now live in
+> `docs/project/`. Claude slash commands are still shown where the bundled
+> Claude adapter is the current implementation.
 >
-> The pipeline has 7 phases. Each phase has a formal gate (`/gate-check`)
-> that must pass before you advance. The authoritative phase sequence is
-> defined in `.claude/docs/workflow-catalog.yaml` and read by `/help`.
+> The pipeline has 7 phases. Each phase has a formal gate. In the Claude
+> adapter, that gate is exposed as `/gate-check`. The canonical neutral catalog
+> is `docs/project/workflow-catalog.yaml`. The Claude catalog remains a mirror
+> for adapter compatibility.
 
 ---
 
@@ -35,10 +37,13 @@
 
 Before you start, make sure you have:
 
-- **Claude Code** installed and working
+- A supported agent runtime
 - **Git** with Git Bash (Windows) or standard terminal (Mac/Linux)
 - **jq** (optional but recommended -- hooks fall back to `grep` if missing)
 - **Python 3** (optional -- some hooks use it for JSON validation)
+
+For non-Claude runtimes, start with `AGENTS.md` and `docs/project/README.md`.
+For Claude Code, use `CLAUDE.md` and the `.claude/` adapter.
 
 ### Step 1: Clone and Open
 
@@ -47,15 +52,17 @@ git clone <repo-url> my-game
 cd my-game
 ```
 
-### Step 2: Run /start
+### Step 2: Run the Onboarding Workflow
 
-If this is your first session:
+In the Claude adapter, this is `/start`:
 
 ```
 /start
 ```
 
-This guided onboarding asks where you are and routes you to the right phase:
+This guided onboarding asks where you are and routes you to the right phase.
+Other runtimes should follow the same flow using the neutral docs and their own
+interaction model:
 
 - **Path A** -- No idea yet: routes to `/brainstorm`
 - **Path B** -- Vague idea: routes to `/brainstorm` with seed
@@ -64,9 +71,9 @@ This guided onboarding asks where you are and routes you to the right phase:
 - **Path D2** -- Existing project, GDDs/ADRs exist: runs `/project-stage-detect`
   then `/adopt` for brownfield migration
 
-### Step 3: Verify Hooks Are Working
+### Step 3: Verify Adapter Automation
 
-Start a new Claude Code session. You should see output from the
+For Claude Code, start a new session. You should see output from the
 `session-start.sh` hook:
 
 ```
@@ -77,12 +84,12 @@ Recent commits:
 ===================================
 ```
 
-If you see this, hooks are working. If not, check `.claude/settings.json` to
-make sure the hook paths are correct for your OS.
+If you see this, the Claude adapter hooks are working. If not, check
+`.claude/settings.json` to make sure the hook paths are correct for your OS.
 
 ### Step 4: Ask for Help Anytime
 
-At any point, run:
+In the Claude adapter, run:
 
 ```
 /help
@@ -134,7 +141,8 @@ production/           # Sprint plans, milestones, releases
 
 > **Tip:** You do not need all of these on day one. Create directories as you
 > reach the phase that needs them. The important thing is to follow this
-> structure when you do create them, because the **rules system** enforces
+> structure when you do create them, because the shared standards and any
+> adapter-specific rules automation enforce
 > standards based on file paths. Code in `src/gameplay/` gets gameplay rules,
 > code in `src/ai/` gets AI rules, and so on.
 
@@ -151,20 +159,12 @@ with defined pillars and a player journey. This is where you figure out
 ### Phase 1 Pipeline
 
 ```
-/brainstorm  -->  game-concept.md  -->  /design-review  -->  /setup-engine
-     |                                        |                    |
-     v                                        v                    v
-  10 concepts     Concept doc with       Validation          Engine pinned in
-  MDA analysis    pillars, MDA,          of concept          technical-preferences.md
-  Player motiv.   core loop, USP         document
-                                                                   |
-                                                                   v
-                                                             /map-systems
-                                                                   |
-                                                                   v
-                                                            systems-index.md
-                                                            (all systems, deps,
-                                                             priority tiers)
+/brainstorm  -->  game-concept.md  -->  /design-review  -->  /setup-engine  -->  /art-bible  -->  /map-systems
+     |                                        |                    |                |                 |
+     v                                        v                    v                v                 v
+  10 concepts     Concept doc with       Validation          Engine pinned    Visual identity    systems-index.md
+  MDA analysis    pillars, MDA,          of concept          in technical-    specification      (all systems, deps,
+  Player motiv.   core loop, USP         document            preferences.md   for production     priority tiers)
 ```
 
 ### Step 1.1: Brainstorm With /brainstorm
@@ -223,10 +223,10 @@ Or with a specific engine:
 /setup-engine godot 4.6
 ```
 
-**What /setup-engine does:**
+**What /setup-engine does in the Claude adapter:**
 
-- Populates `.claude/docs/technical-preferences.md` with naming conventions,
-  performance budgets, and engine-specific defaults
+- Populates the project's technical preferences (`docs/project/technical-preferences.md`)
+  with naming conventions, performance budgets, and engine-specific defaults
 - Detects knowledge gaps (engine version newer than LLM training data) and
   advises cross-referencing `docs/engine-reference/`
 - Creates version-pinned reference docs in `docs/engine-reference/`
@@ -236,7 +236,19 @@ engine-specialist agents to use. If you pick Godot, agents like
 `godot-specialist`, `godot-gdscript-specialist`, and `godot-shader-specialist`
 become your go-to experts.
 
-### Step 1.4: Decompose Your Concept Into Systems
+### Step 1.4: Define the Visual Identity
+
+Before decomposing the game into systems, define the visual identity anchor for
+the project:
+
+```
+/art-bible
+```
+
+This creates `design/art/art-bible.md` and locks the visual direction before
+asset production and detailed UX work begin.
+
+### Step 1.5: Decompose Your Concept Into Systems
 
 Before writing individual GDDs, enumerate all the systems your game needs:
 
@@ -265,10 +277,12 @@ production.
 
 - Engine configured in `technical-preferences.md`
 - `design/gdd/game-concept.md` exists with pillars
+- `design/art/art-bible.md` exists
 - `design/gdd/systems-index.md` exists with dependency ordering
 
 **Verdict:** PASS / CONCERNS / FAIL. CONCERNS is passable with acknowledged
-risks. FAIL blocks advancement.
+risks. FAIL means "not ready" and should normally stop advancement, but the
+gate remains advisory and the user makes the final call.
 
 ---
 
@@ -450,9 +464,9 @@ gives programmers flat, actionable rules. You also establish UX foundations.
                                                          control-manifest.md
         Also in this phase:
         -------------------
-        /ux-design  -->  /ux-review
         Accessibility requirements doc
-        Interaction pattern library
+        Control manifest
+        Architecture review
 ```
 
 ### Step 3.1: Master Architecture Document
@@ -1131,10 +1145,9 @@ Bypasses normal sprint processes with a full audit trail:
 
 **Post-mortem** after launch stabilizes:
 
-```
-Ask Claude to create a post-mortem using the template at
-.claude/docs/templates/post-mortem.md
-```
+Ask your agent to create a post-mortem using the project template for that
+artifact. In the Claude adapter, the current mirror lives at
+`.claude/docs/templates/post-mortem.md`.
 
 ---
 
@@ -1145,9 +1158,9 @@ These topics apply across all phases.
 ### Director Review Modes
 
 Director gates are specialist agents that review your work at key workflow steps.
-By default they run at every checkpoint. You can control how much review you get.
+The settings below describe the current Claude adapter behavior.
 
-**Set your review intensity once during `/start`.** Saved to `production/review-mode.txt`.
+**In Claude Code, set your review intensity once during `/start`.** Saved to `production/review-mode.txt`.
 
 | Mode | What runs | Best for |
 |------|-----------|----------|
@@ -1186,13 +1199,13 @@ Every agent interaction follows this pattern:
 See `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md` for the full protocol with
 examples.
 
-### The AskUserQuestion Tool
+### The AskUserQuestion Tool (Claude Adapter)
 
-Agents use the `AskUserQuestion` tool for structured option presentation.
+Claude agents use the `AskUserQuestion` tool for structured option presentation.
 The pattern is Explain then Capture: full analysis in conversation text first,
 then a clean UI picker for the decision. Use it for design choices,
-architecture decisions, and strategic questions. Do not use it for open-ended
-discovery questions or simple yes/no confirmations.
+architecture decisions, and strategic questions. For non-Claude runtimes,
+use plain text option lists or the runtime's equivalent structured choice UI.
 
 ### Agent Coordination (3-Tier Hierarchy)
 
@@ -1645,9 +1658,9 @@ conflicts go to `producer`.
    coordinate 4 agents yourself -- let `/team-combat`, `/team-narrative`,
    etc. handle the orchestration.
 
-3. **Trust the rules system.** When a rule flags something in your code, fix
-   it. The rules encode hard-won game development wisdom (data-driven values,
-   delta time, accessibility, etc.).
+3. **Trust the standards and checks.** When shared guidance or adapter-specific
+   rules flag something in your code, fix it. They encode hard-won game
+   development wisdom (data-driven values, delta time, accessibility, etc.).
 
 4. **Compact proactively.** At ~65-70% context usage, compact or `/clear`.
    The pre-compact hook saves your progress. Do not wait until you are at the

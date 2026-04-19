@@ -7,7 +7,7 @@ framework. It is self-contained and separate from any game project.
 
 | File | Purpose |
 |------|---------|
-| `catalog.yaml` | Master registry for all 72 skills and 49 agents. Contains category, spec path, and last-test tracking fields. Always read this first when running any test command. |
+| `catalog.yaml` | Master registry for the framework's currently registered skills and agents (currently 72 skills and 49 agents). Contains category, spec path, and last-test tracking fields. Always read this first when running any test command. |
 | `quality-rubric.md` | Category-specific pass/fail metrics. Read the matching `###` section for the skill's category when running `/skill-test category`. |
 | `skills/[category]/[name].md` | Behavioral spec for a skill — 5 test cases + protocol compliance assertions. |
 | `agents/[tier]/[name].md` | Behavioral spec for an agent — 5 test cases + protocol compliance assertions. |
@@ -73,6 +73,16 @@ creative    → writer, world-builder, game-designer, economy-designer,
 3. Read the spec at the `spec:` path
 4. Evaluate assertions case by case
 5. Offer to write results to `results/` and update `catalog.yaml`
+
+## Project context source conventions
+
+- Canonical technical preferences: `docs/project/technical-preferences.md`
+- Claude mirror or fallback: `.claude/docs/technical-preferences.md`
+- Canonical workflow catalog: `docs/project/workflow-catalog.yaml`
+- Claude mirror: `.claude/docs/workflow-catalog.yaml`
+
+When a spec refers to project context, treat the `docs/project/` path as canonical and
+the `.claude/docs/` path as a mirror or fallback for Claude-specific workflows.
 
 ## Workflow for improving a skill
 

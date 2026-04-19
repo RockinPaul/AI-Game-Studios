@@ -30,7 +30,7 @@ status. Re-run whenever new ADRs are accepted or existing ADRs are revised.
 - Note the ADR number and title for every rule sourced
 
 ### Technical Preferences
-- Read `.claude/docs/technical-preferences.md`
+- Read `docs/project/technical-preferences.md`. If it is missing in a legacy Claude-only repo, fall back to `.claude/docs/technical-preferences.md`.
 - Extract: naming conventions, performance budgets, approved libraries/addons,
   forbidden patterns
 

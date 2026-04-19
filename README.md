@@ -1,9 +1,9 @@
 <p align="center">
   <h1 align="center">Claude Code Game Studios</h1>
   <p align="center">
-    Turn a single Claude Code session into a full game development studio.
+    Turn an AI agent workspace into a full game development studio.
     <br />
-    49 agents. 72 skills. One coordinated AI team.
+    Neutral core docs. Claude adapter included. Other agents can plug in.
   </p>
 </p>
 
@@ -13,7 +13,8 @@
   <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-72-green" alt="72 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-12-orange" alt="12 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
-  <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
+  <a href="docs/platforms/support-matrix.md"><img src="https://img.shields.io/badge/runtime-neutral%20core-yes-4c9a2a" alt="Neutral core"></a>
+  <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/adapter-Claude%20Code-f5f5f5?logo=anthropic" alt="Claude adapter"></a>
   <a href="https://www.buymeacoffee.com/donchitos3"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support%20this%20project-FFDD00?logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"></a>
   <a href="https://github.com/sponsors/Donchitos"><img src="https://img.shields.io/badge/GitHub%20Sponsors-Support%20this%20project-ea4aaa?logo=githubsponsors&logoColor=white" alt="GitHub Sponsors"></a>
 </p>
@@ -24,7 +25,13 @@
 
 Building a game solo with AI is powerful — but a single chat session has no structure. No one stops you from hardcoding magic numbers, skipping design docs, or writing spaghetti code. There's no QA pass, no design review, no one asking "does this actually fit the game's vision?"
 
-**Claude Code Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 49 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
+**Claude Code Game Studios** solves this by giving your AI workflow the structure of a real studio. Instead of one general-purpose assistant, you get 49 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
+
+The repository now ships with a **runtime-neutral documentation core** in `docs/project/`, a **neutral role library** in `agents/`, and a **Claude adapter** in `CLAUDE.md` + `.claude/`. That makes it possible to onboard other agent runtimes without teaching them that `.claude/` is the only source of truth.
+
+The canonical workflow catalog now lives in `docs/project/workflow-catalog.yaml`, with `.claude/docs/workflow-catalog.yaml` kept as the Claude adapter mirror. The phase-by-phase neutral workflow docs live under `docs/project/workflows/`, the canonical technical preferences file lives at `docs/project/technical-preferences.md`, with `.claude/docs/technical-preferences.md` kept as the Claude compatibility mirror, the neutral role library lives under `agents/`, and the Claude skill layer is documented through `docs/project/skill-inventory.md` and `docs/project/skill-disposition.md`.
+
+The current neutral-core migration status is tracked in `docs/project/neutral-core-readiness.md`.
 
 The result: you still make every decision, but now you have a team that asks the right questions, catches mistakes early, and keeps your project organized from first brainstorm to launch.
 
@@ -56,7 +63,7 @@ The result: you still make every decision, but now you have a team that asks the
 | **Skills** | 72 | Slash commands for every workflow phase (`/start`, `/design-system`, `/create-epics`, `/create-stories`, `/dev-story`, `/story-done`, etc.) |
 | **Hooks** | 12 | Automated validation on commits, pushes, asset changes, session lifecycle, agent audit trail, and gap detection |
 | **Rules** | 11 | Path-scoped coding standards enforced when editing gameplay, engine, AI, UI, network code, and more |
-| **Templates** | 39 | Document templates for GDDs, UX specs, ADRs, sprint plans, HUD design, accessibility, and more |
+| **Templates** | 38 | Document templates for GDDs, UX specs, ADRs, sprint plans, HUD design, accessibility, and more |
 
 ## Studio Hierarchy
 
@@ -94,7 +101,7 @@ The template includes agent sets for all three major engines. Use the set that m
 
 ## Slash Commands
 
-Type `/` in Claude Code to access all 72 skills:
+Claude Code remains the most complete adapter today. In Claude Code, type `/` to access all 72 skills:
 
 **Onboarding & Navigation**
 `/start` `/help` `/project-stage-detect` `/setup-engine` `/adopt`
@@ -137,10 +144,11 @@ Type `/` in Claude Code to access all 72 skills:
 ### Prerequisites
 
 - [Git](https://git-scm.com/)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`npm install -g @anthropic-ai/claude-code`)
+- One supported agent runtime
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`npm install -g @anthropic-ai/claude-code`) if you want to use the bundled Claude adapter
 - **Recommended**: [jq](https://jqlang.github.io/jq/) (for hook validation) and Python 3 (for JSON validation)
 
-All hooks fail gracefully if optional tools are missing — nothing breaks, you just lose validation.
+Claude adapter hooks fail gracefully if optional tools are missing — nothing breaks, you just lose validation.
 
 ### Setup
 
@@ -150,12 +158,19 @@ All hooks fail gracefully if optional tools are missing — nothing breaks, you 
    cd my-game
    ```
 
-2. **Open Claude Code** and start a session:
+2. **Choose your runtime entrypoint**:
+
+   - Non-Claude agents: start with `AGENTS.md`
+   - Neutral role library: `agents/README.md`
+   - Neutral workflow docs: `docs/project/workflows/`
+   - Claude Code: use `CLAUDE.md` and the `.claude/` adapter
+
+3. **Open Claude Code** and start a session (Claude adapter only):
    ```bash
    claude
    ```
 
-3. **Run `/start`** — the system asks where you are (no idea, vague concept,
+4. **Run `/start`** — the Claude adapter asks where you are (no idea, vague concept,
    clear design, existing work) and guides you to the right workflow. No assumptions.
 
    Or jump directly to a specific skill if you already know what you need:
@@ -172,17 +187,24 @@ versions, and which files are safe to overwrite vs. which need a manual merge.
 ## Project Structure
 
 ```
-CLAUDE.md                           # Master configuration
+AGENTS.md                           # Neutral runtime entrypoint
+agents/                             # Neutral role library
+CLAUDE.md                           # Claude adapter entrypoint
 .claude/
-  settings.json                     # Hooks, permissions, safety rules
-  agents/                           # 49 agent definitions (markdown + YAML frontmatter)
-  skills/                           # 72 slash commands (subdirectory per skill)
-  hooks/                            # 12 hook scripts (bash, cross-platform)
-  rules/                            # 11 path-scoped coding standards
-  statusline.sh                     # Status line script (context%, model, stage, epic breadcrumb)
+  settings.json                     # Claude hook bindings, permissions, safety rules
+  agents/                           # Claude adapter role definitions
+  skills/                           # Claude adapter slash-command layer
+  hooks/                            # Claude lifecycle hook scripts
+  rules/                            # Claude path-scoped coding standards
+  statusline.sh                     # Claude status line script
   docs/
-    workflow-catalog.yaml           # 7-phase pipeline definition (read by /help)
-    templates/                      # 39 document templates
+    workflow-catalog.yaml           # Claude mirror of docs/project/workflow-catalog.yaml
+    templates/                      # Claude adapter template mirror (transitional)
+docs/
+  project/                          # Neutral shared project guidance
+    workflows/                      # Neutral per-phase workflow docs
+    templates/                      # Neutral templates for shared artifacts
+  platforms/                        # Runtime support and adapter docs
 src/                                # Game source code
 assets/                             # Art, audio, VFX, shaders, data files
 design/                             # GDDs, narrative docs, level designs
@@ -279,7 +301,15 @@ This is a **template**, not a locked framework. Everything is meant to be custom
 
 ## Platform Support
 
-Tested on **Windows 10** with Git Bash. All hooks use POSIX-compatible patterns (`grep -E`, not `grep -P`) and include fallbacks for missing tools. Works on macOS and Linux without modification.
+### Runtime Support
+
+- Neutral core docs: `AGENTS.md` + `docs/project/`
+- Claude adapter: `CLAUDE.md` + `.claude/`
+- Current support matrix: `docs/platforms/support-matrix.md`
+
+### OS Support
+
+Tested on **Windows 10** with Git Bash. Claude hook scripts use POSIX-compatible patterns (`grep -E`, not `grep -P`) and include fallbacks for missing tools. Works on macOS and Linux without modification.
 
 ## Community
 
@@ -305,7 +335,7 @@ Sponsorships help fund time spent maintaining skills, adding new agents, keeping
 
 ---
 
-*Built for Claude Code. Maintained and extended — contributions welcome via [GitHub Discussions](https://github.com/Donchitos/Claude-Code-Game-Studios/discussions).*
+*Neutral core, Claude adapter included. Contributions welcome via [GitHub Discussions](https://github.com/Donchitos/Claude-Code-Game-Studios/discussions).*
 
 ## License
 

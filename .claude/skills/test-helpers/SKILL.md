@@ -36,7 +36,7 @@ and systems — so every developer writes less boilerplate and more assertions.
 
 ## 2. Detect Engine and Language
 
-Read `.claude/docs/technical-preferences.md` and extract:
+Read `docs/project/technical-preferences.md` and extract the following. If it is missing in a legacy Claude-only repo, fall back to `.claude/docs/technical-preferences.md`:
 - `Engine:` value
 - `Language:` value
 - `Framework:` from the Testing section

@@ -171,8 +171,11 @@ Update the Technology Stack section, replacing the `[CHOOSE]` placeholders with 
 
 ## 5. Populate Technical Preferences
 
-After updating CLAUDE.md, create or update `.claude/docs/technical-preferences.md` with
-engine-appropriate defaults. Read the existing template first, then fill in:
+After updating CLAUDE.md, create or update `docs/project/technical-preferences.md` with
+engine-appropriate defaults. Then mirror the same populated content into
+`.claude/docs/technical-preferences.md` so existing Claude adapter consumers keep
+reading the same values until they are fully retargeted. Read the existing
+template first, then fill in:
 
 ### Engine & Language Section
 - Fill from the engine choice made in step 4
