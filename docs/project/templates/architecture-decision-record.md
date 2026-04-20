@@ -25,7 +25,7 @@ engine version and design.]
 
 | Field | Value |
 |-------|-------|
-| **Engine** | [e.g. Godot 4.6 / Unity 6 / Unreal Engine 5.4] |
+| **Engine** | [e.g. Godot 4.6 / Unity 6 / Unreal Engine 5.4 / Phaser 3.90.0] |
 | **Domain** | [Physics / Rendering / UI / Audio / Navigation / Animation / Networking / Core / Input / Scripting] |
 | **Knowledge Risk** | [LOW / MEDIUM / HIGH] |
 | **References Consulted** | [engine-reference files used] |

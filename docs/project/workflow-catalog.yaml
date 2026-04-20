@@ -52,7 +52,7 @@ phases:
         artifact:
           glob: "docs/project/technical-preferences.md"
           pattern: '- \*\*Engine\*\*: [^[]'
-        description: "Configure engine, pin version, set naming conventions and performance budgets"
+        description: "Select engine, pin version, populate technical preferences, and create version-aware engine reference docs"
 
       - id: art-bible
         name: "Art Bible"

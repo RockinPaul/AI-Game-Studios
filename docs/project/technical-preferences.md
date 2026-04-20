@@ -28,7 +28,7 @@
 - **Variables**: [TO BE CONFIGURED]
 - **Signals/Events**: [TO BE CONFIGURED]
 - **Files**: [TO BE CONFIGURED]
-- **Scenes/Prefabs**: [TO BE CONFIGURED]
+- **Scenes/Prefabs/Level Assets**: [TO BE CONFIGURED]
 - **Constants**: [TO BE CONFIGURED]
 
 ## Performance Budgets

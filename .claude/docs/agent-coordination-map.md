@@ -45,8 +45,16 @@
 
     godot-specialist   -- Godot 4 lead: GDScript, node/scene, signals, resources
       godot-gdscript-specialist    -- GDScript: static typing, patterns, signals, performance
+      godot-csharp-specialist      -- C#: .NET tooling, mixed-language architecture, Godot C# idioms
       godot-shader-specialist      -- Shaders: Godot shading language, visual shaders, VFX
       godot-gdextension-specialist -- Native: C++/Rust bindings, GDExtension, build systems
+
+    phaser-specialist  -- Phaser 3 lead: scene lifecycle, scaling, rendering, browser delivery
+      phaser-typescript-specialist -- TypeScript: strict typing, scene modules, plugin typings
+      phaser-javascript-specialist -- JavaScript: JSDoc typing, module discipline, browser-safe patterns
+      phaser-shader-specialist     -- Shaders: PostFX, custom pipelines, GLSL ES, WebGL trade-offs
+      phaser-ui-specialist         -- UI: canvas HUD, DOM overlays, Rex UI, responsive layout
+      phaser-tooling-specialist    -- Tooling: bundlers, PWA/wrappers, bundle budgets, browser deployment
 ```
 
 ### Legend

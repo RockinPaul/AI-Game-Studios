@@ -33,7 +33,8 @@ direction, and a systems map that is ready to hand off into system-level design.
 
 1. Explore and narrow the game concept until the core fantasy, pillars, and
    scope are explicit.
-2. Record engine choice, version, conventions, and budgets in
+2. Run the neutral engine setup workflow in `workflows/engine-setup.md`, then
+   record engine choice, version, conventions, and budgets in
    `docs/project/technical-preferences.md`.
 3. Write `design/gdd/game-concept.md` using a structure that captures concept,
    target player experience, core loop, pillars, and scope.

@@ -24,6 +24,10 @@ Four modes:
 
 If no engine is specified, run an interactive engine selection process:
 
+Use `docs/project/workflows/engine-setup.md` as the neutral source of truth for
+engine trade-offs and required outputs. This skill is the Claude wrapper around
+that workflow.
+
 ### Check for existing game concept
 - Read `design/gdd/game-concept.md` if it exists — extract genre, scope, platform
   targets, art style, team size, and any engine recommendation from `/brainstorm`
@@ -36,7 +40,7 @@ If no engine is specified, run an interactive engine selection process:
 
 **Question 1 — Prior experience** (ask this first, always, via `AskUserQuestion`):
 - Prompt: "Have you worked in any of these engines before?"
-- Options: `Godot` / `Unity` / `Unreal Engine 5` / `Multiple — I'll explain` / `None of them`
+- Options: `Godot` / `Unity` / `Unreal Engine 5` / `Phaser` / `Multiple — I'll explain` / `None of them`
 - If they pick a specific engine → recommend that engine. Prior experience outweighs all other factors. Confirm with them and skip the matrix.
 - If "None" or "Multiple" → continue to the questions below.
 
@@ -46,16 +50,16 @@ If no engine is specified, run an interactive engine selection process:
 - Prompt: "What platforms are you targeting for this game?"
 - Options: `PC (Steam / Epic)` / `Mobile (iOS / Android)` / `Console` / `Web / Browser` / `Multiple platforms`
 - Platform rules that feed directly into the recommendation:
-  - Mobile → Unity strongly preferred; Unreal is a poor fit; Godot is viable for simple mobile
-  - Console → Unity or Unreal; Godot console support requires third-party publishers or significant extra work
-  - Web → Godot exports cleanly to web; Unity WebGL is functional; Unreal has poor web support
+  - Mobile → Unity strongly preferred for native mobile; Phaser viable for mobile web / PWA; Unreal is a poor fit; Godot is viable for simple mobile
+  - Console → Unity or Unreal; Godot console support requires third-party publishers or significant extra work; Phaser requires a wrapping / porting strategy and is rarely first choice
+  - Web → Phaser strongly preferred; Godot exports cleanly to web; Unity WebGL is functional; Unreal has poor web support
   - PC only → all engines viable; other factors decide
-  - Multiple → Unity is the most portable across PC/mobile/console
+  - Multiple → Unity is the most portable across native PC/mobile/console; Phaser is strongest when browser delivery is core
 
 1. **What kind of game?** (2D, 3D, or both?)
 2. **Primary input method?** (keyboard/mouse, gamepad, touch, or mixed?)
 3. **Team size and experience?** (solo beginner, solo experienced, small team?)
-4. **Any strong language preferences?** (GDScript, C#, C++, visual scripting?)
+4. **Any strong language preferences?** (GDScript, C#, C++, Blueprint, TypeScript, JavaScript?)
 5. **Budget for engine licensing?** (free only, or commercial licenses OK?)
 
 ### Produce a recommendation
@@ -82,17 +86,26 @@ Do NOT use a simple scoring matrix that eliminates engines. Instead, reason thro
 - Licensing reality: 5% royalty only applies AFTER $1M gross revenue per title. For a first game or any game that doesn't reach $1M, it costs nothing. This threshold is high enough that most indie developers will never pay it.
 - Best fit: AAA-quality 3D; large open-world games; photorealistic visuals; developers with C++ experience or willing to use Blueprint; games targeting high-end PC/console where visual fidelity is a core selling point
 
+**Phaser 3**
+- Genuine strengths: Best-in-class HTML5/web 2D; tiny deploy targets (itch.io, Poki, CrazyGames, PWA); MIT license; TypeScript-first workflow; fast iteration with modern web tooling; zero install for players; strong for jams, educational content, and mobile web
+- Real limitations: 2D only; no built-in native editor; console and mobile-store distribution usually requires wrappers; limited AAA tooling; Phaser 4 is a separate migration path, not a drop-in upgrade
+- Licensing reality: MIT — truly free, no revenue thresholds, you own everything
+- Best fit: web games of any genre; HTML5 portals; educational / serious games; game jams; PWAs; mobile web; teams prioritizing fast iteration over native packaging
+
 **Genre-specific guidance** (factor this into the recommendation):
-- 2D any style → Godot strongly preferred
+- 2D any style → Godot or Phaser depending on browser-first vs native-first goals
 - 3D stylized / atmospheric / contained world → Godot viable, Unity solid alternative
 - 3D open world (large, seamless) → Unity or Unreal; Godot is not production-proven for this
 - 3D photorealistic / AAA-quality → Unreal
 - Mobile-first → Unity strongly preferred
 - Console-first → Unity or Unreal; Godot console support requires extra work
+- Web-first / browser portal → Phaser strongly preferred
+- Educational / jam / hackathon → Phaser or Godot depending on delivery target
+- Mobile web / PWA → Phaser strongly preferred
 - Horror / narrative / walking sim → any engine; match to art style and team experience
 - Action RPG / Soulslike → Unity or Unreal for 3D; community support and assets matter here
-- Platformer 2D → Godot
-- Strategy / top-down / RTS → Godot or Unity depending on 2D vs 3D
+- Platformer 2D → Godot or Phaser
+- Strategy / top-down / RTS → Phaser or Godot for 2D, Unity for 3D
 
 **Recommendation format:**
 1. Show a comparison table with the user's specific factors as rows
@@ -120,13 +133,14 @@ Once the engine is chosen:
 - If version was provided, use it
 - If no version provided, use WebSearch to find the latest stable release:
   - Search: `"[engine] latest stable version [current year]"`
+  - If engine is Phaser and the user did not explicitly request Phaser 4, default to latest stable **Phaser 3.x** release for this template
   - Confirm with the user: "The latest stable [engine] is [version]. Use this?"
 
 ---
 
 ## 4. Update CLAUDE.md Technology Stack
 
-### Language Selection (Godot only)
+### Language Selection (Godot / Phaser)
 
 If Godot was chosen, ask the user which language to use **before** showing the proposed Technology Stack:
 
@@ -139,6 +153,15 @@ If Godot was chosen, ask the user which language to use **before** showing the p
 > Which will this project primarily use?"
 
 Record the choice. It determines the CLAUDE.md template, naming conventions, specialist routing, and which agent is spawned for code files throughout the project.
+
+If Phaser was chosen, ask the user which language to use **before** showing the proposed Technology Stack:
+
+> "Phaser supports two practical project styles:
+>
+>   **A) TypeScript** — recommended. Strong editor tooling, typed scene contracts, safer refactors, better fit for larger projects.
+>   **B) JavaScript** — lighter setup, fastest for jams and tiny browser projects, can still use JSDoc types.
+>
+> Which will this project primarily use?"
 
 ---
 
@@ -165,6 +188,22 @@ Update the Technology Stack section, replacing the `[CHOOSE]` placeholders with 
 - **Language**: C++ (primary), Blueprint (gameplay prototyping)
 - **Build System**: Unreal Build Tool (UBT)
 - **Asset Pipeline**: Unreal Content Pipeline
+```
+
+**For Phaser (TypeScript):**
+```markdown
+- **Engine**: Phaser [version]
+- **Language**: TypeScript
+- **Build System**: Vite (default; Webpack/Rollup optional)
+- **Asset Pipeline**: Phaser Loader + Vite asset handling + TexturePacker (optional)
+```
+
+**For Phaser (JavaScript):**
+```markdown
+- **Engine**: Phaser [version]
+- **Language**: JavaScript
+- **Build System**: Vite (default; Webpack/Rollup optional)
+- **Asset Pipeline**: Phaser Loader + Vite asset handling + TexturePacker (optional)
 ```
 
 ---
@@ -198,6 +237,20 @@ template first, then fill in:
 - Functions: PascalCase (e.g., `TakeDamage()`)
 - Booleans: `b` prefix (e.g., `bIsAlive`)
 - Files: Match class without prefix (e.g., `PlayerController.h`)
+
+**For Phaser (TypeScript):**
+- Classes: PascalCase (e.g., `BootScene`, `PlayerController`)
+- Variables/properties: camelCase (e.g., `moveSpeed`)
+- Private fields: `#privateField` or `_privateField` if project standard requires compatibility
+- Functions/methods: camelCase (e.g., `spawnEnemy()`)
+- Files: PascalCase for scenes/classes, camelCase for utility modules
+- Constants: UPPER_SNAKE_CASE or PascalCase enum members
+
+**For Phaser (JavaScript):**
+- Classes: PascalCase
+- Variables/functions: camelCase
+- Files: PascalCase for scenes/classes, camelCase for plain modules
+- Constants: UPPER_SNAKE_CASE
 
 ### Input & Platform Section
 
@@ -237,7 +290,7 @@ Example filled section:
   - Prompt: "Should I set default performance budgets now, or leave them for later?"
   - Options: `[A] Set defaults now (60fps, 16.6ms frame budget, engine-appropriate draw call limit)` / `[B] Leave as [TO BE CONFIGURED] — I'll set these when I know my target hardware`
   - If [A]: populate with the suggested defaults. If [B]: leave as placeholder.
-- **Testing**: Suggest engine-appropriate framework (GUT for Godot, NUnit for Unity, etc.) — ask before adding.
+- **Testing**: Suggest engine-appropriate framework (GUT for Godot, NUnit for Unity, Vitest for Phaser logic, etc.) — ask before adding.
 - **Forbidden Patterns**: Leave as placeholder — do NOT pre-populate.
 - **Allowed Libraries**: Leave as placeholder — do NOT pre-populate dependencies the project does not currently need. Only add a library here when it is actively being integrated, not speculatively.
 
@@ -294,9 +347,55 @@ Also populate the `## Engine Specialists` section in `technical-preferences.md` 
 | General architecture review | unreal-specialist |
 ```
 
+**For Phaser (TypeScript):**
+```markdown
+## Engine Specialists
+- **Primary**: phaser-specialist
+- **Language/Code Specialist**: phaser-typescript-specialist
+- **Shader Specialist**: phaser-shader-specialist (PostFX, custom pipelines, GLSL ES)
+- **UI Specialist**: phaser-ui-specialist (canvas UI, DOM overlays, Rex UI, responsive layout)
+- **Additional Specialists**: phaser-javascript-specialist (only for mixed JS projects), phaser-tooling-specialist (bundler, PWA, wrapping, bundle budgets)
+- **Routing Notes**: Invoke primary for architecture, scene lifecycle, scaling, physics selection, and broad Phaser review. Invoke TypeScript specialist for scene code, plugin typings, shared contracts, and strict TS structure. Invoke shader specialist for rendering effects and GPU trade-offs. Invoke UI specialist for HUD, menus, DOM overlays, and responsive browser UI. Invoke tooling specialist for Vite/Webpack/Rollup, packaging, and browser delivery workflow.
+
+### File Extension Routing
+
+| File Extension / Type | Specialist to Spawn |
+|-----------------------|---------------------|
+| Game code (.ts files) | phaser-typescript-specialist |
+| Shader / pipeline files (.glsl, .frag, .vert) | phaser-shader-specialist |
+| UI / screen files (DOM UI, HTML/CSS, Rex UI config) | phaser-ui-specialist |
+| Scene / level files (`Phaser.Scene` modules, tilemap scene loaders) | phaser-specialist |
+| Native extension / plugin files (plugin wrappers, bundler integration) | phaser-tooling-specialist |
+| General architecture review | phaser-specialist |
+```
+
+**For Phaser (JavaScript):**
+```markdown
+## Engine Specialists
+- **Primary**: phaser-specialist
+- **Language/Code Specialist**: phaser-javascript-specialist
+- **Shader Specialist**: phaser-shader-specialist (PostFX, custom pipelines, GLSL ES)
+- **UI Specialist**: phaser-ui-specialist (canvas UI, DOM overlays, Rex UI, responsive layout)
+- **Additional Specialists**: phaser-tooling-specialist (bundler, PWA, wrapping, bundle budgets)
+- **Routing Notes**: Invoke primary for architecture, scene lifecycle, scaling, physics selection, and broad Phaser review. Invoke JavaScript specialist for module discipline, JSDoc typing, and maintainable browser-safe JS. Invoke shader specialist for rendering effects and GPU trade-offs. Invoke UI specialist for HUD, menus, DOM overlays, and responsive browser UI. Invoke tooling specialist for Vite/Webpack/Rollup, packaging, and browser delivery workflow.
+
+### File Extension Routing
+
+| File Extension / Type | Specialist to Spawn |
+|-----------------------|---------------------|
+| Game code (.js files) | phaser-javascript-specialist |
+| Shader / pipeline files (.glsl, .frag, .vert) | phaser-shader-specialist |
+| UI / screen files (DOM UI, HTML/CSS, Rex UI config) | phaser-ui-specialist |
+| Scene / level files (`Phaser.Scene` modules, tilemap scene loaders) | phaser-specialist |
+| Native extension / plugin files (plugin wrappers, bundler integration) | phaser-tooling-specialist |
+| General architecture review | phaser-specialist |
+```
+
 ### Collaborative Step
 Present the filled-in preferences to the user. For Godot, include the chosen language and note where the full naming conventions and routing tables live:
 > "Here are the default technical preferences for [engine] ([language if Godot]). The naming conventions and specialist routing are in Appendix A of this skill — I'll apply the [GDScript/C#/Both] variant. Want to customize any of these, or shall I save the defaults?"
+
+For Phaser, include the chosen language directly in the summary and note that the neutral workflow source is `docs/project/workflows/engine-setup.md`.
 
 For all other engines, present the defaults directly without referencing the appendix.
 
@@ -313,6 +412,7 @@ Check whether the engine version is likely beyond the LLM's training data.
 - Godot: training data likely covers up to ~4.3
 - Unity: training data likely covers up to ~2023.x / early 6000.x
 - Unreal: training data likely covers up to ~5.3 / early 5.4
+- Phaser: training data likely covers up to roughly 3.88.x; Phaser 3.90.0 is near/just beyond cutoff, Phaser 4.x is far beyond cutoff
 
 Compare the user's chosen version against these baselines:
 

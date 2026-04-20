@@ -9,7 +9,7 @@
 | `/start` | First-time onboarding — asks where you are, then guides you to the right workflow |
 | `/help` | Context-aware "what do I do next?" — reads current stage and surfaces the required next step |
 | `/project-stage-detect` | Full project audit — detect phase, identify existence gaps, recommend next steps |
-| `/setup-engine` | Configure engine + version, detect knowledge gaps, populate version-aware reference docs |
+| `/setup-engine` | Configure Godot / Unity / Unreal / Phaser, detect knowledge gaps, and populate version-aware reference docs |
 | `/adopt` | Brownfield format audit — checks internal structure of existing GDDs/ADRs/stories, produces migration plan |
 
 ## Game Design

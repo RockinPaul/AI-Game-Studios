@@ -87,3 +87,9 @@ Use the engine-specific role set that matches the current project.
 | `ue-replication-specialist` | Unreal | Balanced | `agents/engine/ue-replication-specialist.md` | Unreal replication, authority flow, multiplayer behavior |
 | `ue-umg-specialist` | Unreal | Balanced | `agents/engine/ue-umg-specialist.md` | UMG, HUD, Unreal UI architecture |
 | `ue-blueprint-specialist` | Unreal | Balanced | `agents/engine/ue-blueprint-specialist.md` | Blueprint architecture, Blueprint and C++ boundaries |
+| `phaser-specialist` | Phaser | Balanced | `agents/engine/phaser-specialist.md` | Phaser architecture, scene lifecycle, scaling, rendering, and web deployment choices |
+| `phaser-typescript-specialist` | Phaser | Balanced | `agents/engine/phaser-typescript-specialist.md` | Strict TypeScript, plugin typing, scene modules, and Phaser code structure |
+| `phaser-javascript-specialist` | Phaser | Balanced | `agents/engine/phaser-javascript-specialist.md` | Phaser JavaScript conventions, JSDoc typing, and module discipline |
+| `phaser-shader-specialist` | Phaser | Balanced | `agents/engine/phaser-shader-specialist.md` | PostFX, custom pipelines, GLSL ES, and browser renderer trade-offs |
+| `phaser-ui-specialist` | Phaser | Balanced | `agents/engine/phaser-ui-specialist.md` | Canvas UI, DOM overlays, Rex UI, text systems, and responsive scaling |
+| `phaser-tooling-specialist` | Phaser | Balanced | `agents/engine/phaser-tooling-specialist.md` | Vite/Webpack/Rollup, bundle budgets, PWA wrapping, and browser delivery workflow |

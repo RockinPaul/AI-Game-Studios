@@ -60,6 +60,7 @@ domain lead) should delegate to specialists.
 | `unreal-specialist` | Unreal Engine 5 | Sonnet | Blueprint vs C++, GAS overview, UE subsystems, Unreal optimization |
 | `unity-specialist` | Unity | Sonnet | MonoBehaviour vs DOTS, Addressables, URP/HDRP, Unity optimization |
 | `godot-specialist` | Godot 4 | Sonnet | GDScript patterns, node/scene architecture, signals, Godot optimization |
+| `phaser-specialist` | Phaser 3 | Sonnet | Scene lifecycle, scaling, rendering, DOM overlays, and browser-first Phaser architecture |
 
 ### Unreal Engine Sub-Specialists
 
@@ -84,5 +85,16 @@ domain lead) should delegate to specialists.
 | Agent | Subsystem | Model | When to Use |
 | ---- | ---- | ---- | ---- |
 | `godot-gdscript-specialist` | GDScript | Sonnet | Static typing, design patterns, signals, coroutines, GDScript performance |
+| `godot-csharp-specialist` | C# | Sonnet | Godot C# integration, .NET tooling, mixed-language architecture |
 | `godot-shader-specialist` | Shaders/Rendering | Sonnet | Godot shading language, visual shaders, particles, post-processing |
 | `godot-gdextension-specialist` | GDExtension | Sonnet | C++/Rust bindings, native performance, custom nodes, build systems |
+
+### Phaser Sub-Specialists
+
+| Agent | Subsystem | Model | When to Use |
+| ---- | ---- | ---- | ---- |
+| `phaser-typescript-specialist` | TypeScript | Sonnet | Strict TS, scene modules, plugin typings, maintainable Phaser code structure |
+| `phaser-javascript-specialist` | JavaScript | Sonnet | Phaser JS conventions, JSDoc typing, and lightweight browser-first codebases |
+| `phaser-shader-specialist` | Shaders/Rendering | Sonnet | PostFX, custom pipelines, GLSL ES, and browser renderer trade-offs |
+| `phaser-ui-specialist` | UI / DOM Overlays | Sonnet | Canvas HUD, DOM overlays, Rex UI, responsive scaling, browser accessibility |
+| `phaser-tooling-specialist` | Tooling / Delivery | Sonnet | Vite/Webpack/Rollup, bundle budgets, PWAs, wrappers, browser deployment |

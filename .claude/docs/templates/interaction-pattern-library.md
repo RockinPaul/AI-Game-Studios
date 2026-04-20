@@ -4,8 +4,8 @@
 > **Author**: [ux-designer]
 > **Last Updated**: [Date]
 > **Version**: [1.0]
-> **Engine**: [Godot 4.6 / Unity 6 / Unreal Engine 5]
-> **UI Framework**: [Godot Control nodes / Unity UI Toolkit / Unreal UMG]
+> **Engine**: [Project engine and version]
+> **UI Framework**: [Engine-specific UI framework(s) used by this project]
 > **Related Documents**:
 > - `docs/art-bible.md` — visual standards (colors, typography, iconography)
 > - `docs/accessibility-requirements.md` — accessibility commitments per feature
@@ -567,11 +567,7 @@ Bar pattern). Values with no defined endpoint.
 - Indeterminate progress bars: announce "Loading, in progress" — do not announce changes since the value is unknown.
 - Motion reduction: Indeterminate animation is replaced with a static "loading" indicator. Smooth fill animation is replaced with instant jump to new value.
 
-**Implementation Notes**: [Godot: `ProgressBar` built-in with custom theming.
-For indeterminate mode, `ProgressBar` does not have a native indeterminate state
-in Godot 4.x — implement using a looping `Tween` on a fill element's position.
-Ensure the Tween is paused when motion reduction mode is active and a static
-indicator is shown instead.]
+**Implementation Notes**: [Implement using engine-native progress-bar component or custom HUD widget. If the engine has no native indeterminate state, use a looping animation on a fill element and pause that animation when motion reduction mode is active.]
 
 ---
 
@@ -606,12 +602,7 @@ which is high friction.
 - Screen reader: Role: "textbox." Accessible name: field label (not placeholder text). Current value announced. Character limit announced when reached. Validation errors announced immediately on occurrence.
 - Placeholder text must not be used as the only label — a visible label above or beside the field is required. Placeholder text disappears when the player types, causing confusion for players with cognitive or memory impairments.
 
-**Implementation Notes**: [Godot `LineEdit`: set `placeholder_text` for the hint
-but always include a visible `Label` node as the field's accessible name. Bind
-`text_changed` signal for real-time validation. Bind `text_submitted` for form
-submission on Enter. On console, `LineEdit.call("_popup_keyboard")` or use the OS
-virtual keyboard API — verify against engine-reference/godot/ for Godot 4.6
-console keyboard API specifics.]
+**Implementation Notes**: [Use the engine's single-line text input control or a DOM/overlay field where browser or platform accessibility requires it. Always include a visible label, bind real-time validation to change events, and verify console/mobile virtual keyboard behavior against `docs/engine-reference/<engine>/`.]
 
 ---
 
@@ -644,12 +635,7 @@ visibility (use a layout pattern instead). Navigation between different screens
 - Screen reader: Role: "tab" for individual tabs. Role: "tablist" for the container. Role: "tabpanel" for the content area. Active tab state: "selected." Accessible name: tab label. Tabpanel is labeled by its corresponding tab.
 - The active tab must be visually distinguishable by more than color alone (underline, fill pattern, or weight change in addition to color).
 
-**Implementation Notes**: [Godot: `TabContainer` built-in. For custom visual
-styling, implement manually with a `HBoxContainer` of tab buttons and a
-`MarginContainer` for content. The shoulder button shortcut (LB/RB) must be
-implemented in the screen's `_input()` override — it is not built into Godot's
-tab system. Check platform conventions: Xbox uses LB/RB; PlayStation uses L1/R1;
-both are the same physical button, so a single binding works.]
+**Implementation Notes**: [Use the engine's tab container if it exists; otherwise build with tab buttons plus a content panel. Shoulder-button shortcuts should be wired explicitly in the screen input layer. Check platform conventions: Xbox uses LB/RB; PlayStation uses L1/R1; both map to same physical action.]
 
 ---
 
@@ -679,14 +665,10 @@ state and an end state).
 
 **Accessibility**:
 - Keyboard/Gamepad: The scroll container itself should not require explicit scrollbar interaction — navigating list items inside it should auto-scroll to keep focused items in view.
-- Screen reader: The scroll container announces "scrollable" and the scroll position ("showing items 5 through 15 of 30"). This requires engine accessibility support — verify in engine-reference/godot/.
+- Screen reader: The scroll container announces "scrollable" and the scroll position ("showing items 5 through 15 of 30"). This requires engine accessibility support — verify against `docs/engine-reference/<engine>/`.
 - Fade edges (content fading at scroll boundaries to indicate more content exists) are a helpful visual affordance but must not be the only indicator that content exists beyond the visible area. Include a scrollbar.
 
-**Implementation Notes**: [Godot `ScrollContainer`: call `ensure_control_visible()`
-on the focused child whenever `gui_focus_changed` fires inside the container.
-Bind this via a recursive `connect` on the container's `gui_focus_changed` signal.
-For smooth scroll animation, use a `Tween` on `scroll_vertical` rather than
-setting it directly.]
+**Implementation Notes**: [Use the engine's scroll container or list widget and ensure focused children auto-scroll into view. For smooth scrolling, animate the scroll offset rather than jumping instantly when platform UX allows it.]
 
 ---
 
@@ -742,11 +724,7 @@ any context where an ability must show availability state.
 
 **Accessibility**: All cooldown/charge information must have a numeric value (screen reader cannot parse radial overlays). The cooldown timer number satisfies this. Ability names and descriptions must be exposed to screen readers via tooltip.
 
-**Implementation Notes**: [Godot: Custom `TextureButton` subclass with overlay
-`Control` nodes for cooldown radial and charge pips. The cooldown radial uses a
-custom shader on a `ColorRect` rotating a mask — or implement with a
-`ProgressBar` styled as circular if engine supports it. Verify against
-engine-reference/godot/ for Godot 4.6 shader support for this pattern.]
+**Implementation Notes**: [Use engine-native button widget or HUD object with overlay elements for cooldown radial and charge pips. Implement cooldown radial with shader, mask, or progress component depending on engine support. Verify pattern against `docs/engine-reference/<engine>/` before committing to shader-heavy implementation.]
 
 ---
 
@@ -1065,7 +1043,7 @@ Store the "return focus" element reference before pushing so it can be restored 
 
 | Question | Owner | Deadline | Resolution |
 |----------|-------|----------|-----------|
-| [Does the engine's accessibility node system support screen reader announcements for toast notifications without requiring focus? Verify against engine-reference/godot/ for Godot 4.6.] | [ux-designer] | [Before first menu implementation] | [Unresolved] |
+| [Does the selected engine support screen reader announcements for toast notifications without requiring focus? Verify against `docs/engine-reference/<engine>/`.] | [ux-designer] | [Before first menu implementation] | [Unresolved] |
 | [What is the platform-correct confirm/cancel button mapping for Nintendo Switch release? Nintendo first-party convention differs from Xbox/PlayStation.] | [producer] | [Before platform certification submission] | [Unresolved] |
 | [Should damage numbers be pooled as Label3D nodes or rendered in a SubViewport? Verify performance budget in coordination with technical-director.] | [lead-programmer, ux-designer] | [Before combat HUD implementation] | [Unresolved] |
 | [What is the maximum number of simultaneous toast notifications before the queue becomes visually overwhelming? Needs playtesting.] | [ux-designer] | [First playtesting session] | [Unresolved] |

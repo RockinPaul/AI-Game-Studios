@@ -13,6 +13,8 @@ language.
    retrospective artifact.
 4. Cross-check any phase requirement against the authoritative catalog in
    `docs/project/workflow-catalog.yaml`.
+5. Use `docs/project/workflows/engine-setup.md` when an adapter asks you to run
+   engine selection or version pinning.
 
 ## Workflow Map
 
@@ -29,6 +31,14 @@ layer adds one onboarding guide ahead of them.
 | 5 | `workflows/production.md` | Catalog phase | Run sprint-based implementation, review, QA planning, and retrospectives |
 | 6 | `workflows/polish.md` | Catalog phase | Drive performance, balance, asset quality, and repeated playtesting |
 | 7 | `workflows/release.md` | Catalog phase | Complete release readiness work and ship |
+
+## Supporting Workflows
+
+These docs define shared steps that adapters may wrap with runtime-specific UX.
+
+| Workflow Doc | Purpose |
+| --- | --- |
+| `workflows/engine-setup.md` | Neutral definition of engine choice, version pinning, and engine reference population |
 
 ## Templates
 
