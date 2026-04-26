@@ -98,6 +98,11 @@ __pycache__/
 node_modules/
 .npm/
 
+# Phaser / web build outputs
+coverage/
+playwright-report/
+test-results/
+
 # === Archives ===
 *.zip
 *.tar.gz

@@ -5,6 +5,7 @@
 
 ## Engine & Language
 
+<!-- Engine examples: Godot 4, Unity, Unreal Engine 5, Phaser 4. -->
 - **Engine**: [TO BE CONFIGURED — run setup-engine workflow]
 - **Language**: [TO BE CONFIGURED]
 - **Rendering**: [TO BE CONFIGURED]
@@ -14,6 +15,7 @@
 
 <!-- Used to scope UX, test helpers, and implementation choices to the correct -->
 <!-- input methods and platform constraints. -->
+<!-- Target platform examples include PC, Console, Mobile, and Web. -->
 
 - **Target Platforms**: [TO BE CONFIGURED — e.g., PC, Console, Mobile, Web]
 - **Input Methods**: [TO BE CONFIGURED — e.g., Keyboard/Mouse, Gamepad, Touch, Mixed]

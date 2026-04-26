@@ -221,7 +221,15 @@ Or with a specific engine:
 
 ```
 /setup-engine godot 4.6
+/setup-engine phaser 4.0.0
 ```
+
+| Engine | Lead Agent | Sub-Specialists |
+|--------|-----------|-----------------|
+| Godot 4 | `godot-specialist` | GDScript, Shaders, GDExtension |
+| Unity | `unity-specialist` | DOTS/ECS, Shaders/VFX, Addressables, UI Toolkit |
+| Unreal Engine 5 | `unreal-specialist` | GAS, Blueprints, Replication, UMG/CommonUI |
+| Phaser 4 | `phaser-specialist` | TypeScript, Rendering, Physics, UI |
 
 **What /setup-engine does in the Claude adapter:**
 
@@ -234,7 +242,8 @@ Or with a specific engine:
 **Why this matters:** Once you set the engine, the system knows which
 engine-specialist agents to use. If you pick Godot, agents like
 `godot-specialist`, `godot-gdscript-specialist`, and `godot-shader-specialist`
-become your go-to experts.
+become your go-to experts; if you pick Phaser, `phaser-specialist` and its
+TypeScript, rendering, physics, and UI sub-specialists take that role.
 
 ### Step 1.4: Define the Visual Identity
 
@@ -1398,6 +1407,7 @@ Reads existing code and generates GDD-format design documentation from it.
 | Unreal Blueprints | `ue-blueprint-specialist` | 3 |
 | Unreal replication | `ue-replication-specialist` | 3 |
 | Unreal UMG/CommonUI | `ue-umg-specialist` | 3 |
+| Phaser-specific help | `phaser-specialist` | 3 |
 
 ### Agent Hierarchy
 
