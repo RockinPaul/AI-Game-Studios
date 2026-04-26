@@ -279,7 +279,7 @@ just translating text. This mode validates the implementation.
 Read `docs/project/technical-preferences.md` to determine the engine. If it is missing in a legacy Claude-only repo, fall back to `.claude/docs/technical-preferences.md`. Then check:
 
 **Layout mirroring**
-- Is RTL layout enabled in the engine? (Godot: `Control.layout_direction`, Unity: `RTL Support` package, Unreal: text direction flags)
+- Is RTL layout enabled in the engine? (Godot: `Control.layout_direction`, Unity: `RTL Support` package, Unreal: text direction flags, Phaser: DOM overlay/CSS `direction` or canvas text behavior verified)
 - Are all UI containers set to auto-mirror, or are positions hardcoded?
 - Do progress bars, health bars, and directional indicators mirror correctly?
 
