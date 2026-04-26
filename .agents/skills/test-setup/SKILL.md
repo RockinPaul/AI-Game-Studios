@@ -84,7 +84,7 @@ After approval, create the following files:
 
 ### `tests/README.md`
 
-```markdown
+````markdown
 # Test Infrastructure
 
 **Engine**: [engine name + version]
@@ -126,8 +126,7 @@ tests/
 
 Tests run automatically on every push to `main` and on every pull request.
 A failed test suite blocks merging.
-```
-```
+````
 
 ### Engine-specific files
 
