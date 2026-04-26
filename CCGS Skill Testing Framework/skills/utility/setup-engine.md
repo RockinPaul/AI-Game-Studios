@@ -116,7 +116,38 @@ None. `/setup-engine` is a technical configuration skill. No director gates appl
 
 ---
 
-### Case 4: Engine Already Configured — Offers to reconfigure specific sections
+### Case 4: Phaser + TypeScript — Browser game configuration
+
+**Fixture:**
+- `technical-preferences.md` contains only placeholders
+- Engine argument provided: `phaser`
+- Target platform is web/browser
+
+**Input:** `/setup-engine phaser`
+
+**Expected behavior:**
+1. Skill sets engine to Phaser 4 and primary language to TypeScript
+2. Skill confirms guided engine options include Godot, Unity, Unreal, Phaser
+3. Skill recognizes web/browser platform needs as a good fit for Phaser
+4. Specialist assignments reference phaser-specialist, phaser-typescript-specialist,
+   phaser-rendering-specialist, phaser-physics-specialist, and phaser-ui-specialist
+5. Routing table maps `.ts` to `phaser-typescript-specialist` and Phaser render,
+   physics, and UI concerns to the matching Phaser sub-specialists
+6. Testing defaults are Vitest for pure logic and Playwright for browser/canvas
+   rendering checks
+7. Skill asks "May I write to `technical-preferences.md`?" and writes on approval
+
+**Assertions:**
+- [ ] Engine field is set to Phaser 4
+- [ ] Guided options list Godot, Unity, Unreal, Phaser
+- [ ] Browser/web target can recommend Phaser
+- [ ] Routing table includes `.ts` → phaser-typescript-specialist
+- [ ] Testing defaults include Vitest and Playwright
+- [ ] Verdict is COMPLETE
+
+---
+
+### Case 5: Engine Already Configured — Offers to reconfigure specific sections
 
 **Fixture:**
 - `technical-preferences.md` has engine set to Godot 4 with all fields populated
@@ -141,7 +172,7 @@ None. `/setup-engine` is a technical configuration skill. No director gates appl
 
 ---
 
-### Case 5: Director Gate Check — No gate; setup-engine is a utility skill
+### Case 6: Director Gate Check — No gate; setup-engine is a utility skill
 
 **Fixture:**
 - Fresh project with no engine configured

@@ -6,8 +6,8 @@
 configured engine. It creates the `tests/` directory structure defined in
 `coding-standards.md` (unit/, integration/, performance/, playtest/) and
 generates the appropriate test runner configuration for the detected engine:
-GdUnit4 config for Godot, Unity Test Runner asmdef for Unity, or Unreal headless
-runner for Unreal Engine.
+GdUnit4 config for Godot, Unity Test Runner asmdef for Unity, Unreal headless
+runner for Unreal Engine, or Vitest and Playwright config for Phaser.
 
 Each file or directory created is gated behind a "May I write" ask. If the test
 framework already exists, the skill verifies the configuration rather than
@@ -111,7 +111,35 @@ None. `/test-setup` is a scaffolding utility. No director gates apply.
 
 ---
 
-### Case 4: No Engine Configured — Redirects to /setup-engine
+### Case 4: Phaser Project — Scaffolds Vitest and Playwright browser tests
+
+**Fixture:**
+- `technical-preferences.md` has engine set to Phaser 4, language TypeScript
+- `tests/` directory does not exist
+- Project uses npm scripts for CI
+
+**Input:** `/test-setup`
+
+**Expected behavior:**
+1. Skill reads engine from `technical-preferences.md` → Phaser 4 + TypeScript
+2. Skill drafts Phaser test directories: `tests/phaser/`, `tests/unit/`,
+   `tests/integration/`, `tests/performance/`, and `tests/playtest/`
+3. Skill generates Vitest configuration for pure logic and Playwright
+   configuration for browser/canvas smoke checks
+4. Skill aligns npm CI scripts with Vitest and Playwright commands
+5. Skill asks "May I write the tests/ directory structure?"
+6. Verdict is COMPLETE
+
+**Assertions:**
+- [ ] `tests/phaser/` and `tests/unit/` are included
+- [ ] Vitest config is generated for pure TypeScript logic
+- [ ] Playwright config is generated for browser/canvas checks
+- [ ] npm CI scripts run Vitest and Playwright
+- [ ] Verdict is COMPLETE
+
+---
+
+### Case 5: No Engine Configured — Redirects to /setup-engine
 
 **Fixture:**
 - `technical-preferences.md` contains only placeholders (engine not set)
@@ -132,7 +160,7 @@ None. `/test-setup` is a scaffolding utility. No director gates apply.
 
 ---
 
-### Case 5: Director Gate Check — No gate; test-setup is a scaffolding utility
+### Case 6: Director Gate Check — No gate; test-setup is a scaffolding utility
 
 **Fixture:**
 - Engine configured, tests/ does not exist

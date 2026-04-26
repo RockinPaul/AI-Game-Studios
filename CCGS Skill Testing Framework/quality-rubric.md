@@ -219,12 +219,13 @@ qa-tester, writer, world-builder
 godot-shader-specialist, godot-gdextension-specialist, unity-specialist, unity-ui-specialist,
 unity-shader-specialist, unity-dots-specialist, unity-addressables-specialist,
 unreal-specialist, ue-blueprint-specialist, ue-gas-specialist, ue-umg-specialist,
-ue-replication-specialist
+ue-replication-specialist, phaser-specialist, phaser-typescript-specialist,
+phaser-rendering-specialist, phaser-physics-specialist, phaser-ui-specialist
 
 | Metric | PASS criteria |
 |---|---|
 | **E1 — Version-aware** | References engine version from `docs/engine-reference/` before suggesting API calls; flags post-cutoff risk |
-| **E2 — File routing** | Routes file types to the correct sub-specialist (e.g., `.gdshader` → godot-shader-specialist, not godot-gdscript-specialist) |
+| **E2 — File routing** | Routes file types and feature areas to the correct sub-specialist (e.g., `.gdshader` -> godot-shader-specialist, `.ts` -> phaser-typescript-specialist, Phaser post-fx -> phaser-rendering-specialist) |
 | **E3 — Engine-specific patterns** | Enforces engine-specific idioms (e.g., GDScript static typing, C# attribute exports, Blueprint function libraries) |
 
 ### `qa`

@@ -1032,6 +1032,37 @@ agents:
     last_spec_result: ""
     category: engine
 
+  # Engine Specialists — Phaser
+  - name: phaser-specialist
+    spec: CCGS Skill Testing Framework/agents/engine/phaser/phaser-specialist.md
+    last_spec: ""
+    last_spec_result: ""
+    category: engine
+
+  - name: phaser-typescript-specialist
+    spec: CCGS Skill Testing Framework/agents/engine/phaser/phaser-typescript-specialist.md
+    last_spec: ""
+    last_spec_result: ""
+    category: engine
+
+  - name: phaser-rendering-specialist
+    spec: CCGS Skill Testing Framework/agents/engine/phaser/phaser-rendering-specialist.md
+    last_spec: ""
+    last_spec_result: ""
+    category: engine
+
+  - name: phaser-physics-specialist
+    spec: CCGS Skill Testing Framework/agents/engine/phaser/phaser-physics-specialist.md
+    last_spec: ""
+    last_spec_result: ""
+    category: engine
+
+  - name: phaser-ui-specialist
+    spec: CCGS Skill Testing Framework/agents/engine/phaser/phaser-ui-specialist.md
+    last_spec: ""
+    last_spec_result: ""
+    category: engine
+
   # Operations
   - name: devops-engineer
     spec: CCGS Skill Testing Framework/agents/operations/devops-engineer.md
