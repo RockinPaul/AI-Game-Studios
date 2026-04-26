@@ -1237,7 +1237,10 @@ Tier 3 (Specialists):  gameplay-programmer, engine-programmer,
                        godot-gdscript-specialist, godot-shader-specialist,
                        unity-specialist, unity-csharp-specialist,
                        unreal-specialist, unreal-blueprint-specialist,
-                       unreal-cpp-specialist
+                       unreal-cpp-specialist, phaser-specialist,
+                       phaser-typescript-specialist,
+                       phaser-rendering-specialist,
+                       phaser-physics-specialist, phaser-ui-specialist
 ```
 
 **Coordination rules:**

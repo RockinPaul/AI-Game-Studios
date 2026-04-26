@@ -15,7 +15,7 @@ adapter layer.
 - **Asset Pipeline**: [SPECIFY after choosing engine]
 
 > **Note**: Engine-specialist agents exist for Godot, Unity, Unreal, and Phaser
-> with dedicated sub-specialists. Use the set matching your engine.
+> with dedicated sub-specialists. Phaser has dedicated TypeScript, rendering, physics, and UI sub-specialists. Use the set matching your engine.
 
 ## Project Structure
 

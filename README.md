@@ -177,7 +177,7 @@ Claude adapter hooks fail gracefully if optional tools are missing — nothing b
    Or jump directly to a specific skill if you already know what you need:
    - `/brainstorm` — explore game ideas from scratch
    - `/setup-engine godot 4.6` — configure your engine if you already know
-   - `/setup-engine phaser 4.0.0` — configure Phaser if you already know
+   - `/setup-engine phaser 4.0.0` — configure Phaser for a web-first TypeScript project
    - `/project-stage-detect` — analyze an existing project
 
 ## Upgrading
