@@ -1411,6 +1411,10 @@ Reads existing code and generates GDD-format design documentation from it.
 | Unreal replication | `ue-replication-specialist` | 3 |
 | Unreal UMG/CommonUI | `ue-umg-specialist` | 3 |
 | Phaser-specific help | `phaser-specialist` | 3 |
+| Phaser TypeScript | `phaser-typescript-specialist` | 3 |
+| Phaser rendering | `phaser-rendering-specialist` | 3 |
+| Phaser physics | `phaser-physics-specialist` | 3 |
+| Phaser UI | `phaser-ui-specialist` | 3 |
 
 ### Agent Hierarchy
 
