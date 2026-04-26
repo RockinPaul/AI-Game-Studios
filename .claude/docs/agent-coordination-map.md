@@ -47,6 +47,12 @@
       godot-gdscript-specialist    -- GDScript: static typing, patterns, signals, performance
       godot-shader-specialist      -- Shaders: Godot shading language, visual shaders, VFX
       godot-gdextension-specialist -- Native: C++/Rust bindings, GDExtension, build systems
+
+    phaser-specialist -- Phaser 4 lead: scenes, loader, browser runtime, deployment
+      phaser-typescript-specialist -- TypeScript: scene code, modules, Vitest logic
+      phaser-rendering-specialist  -- Rendering: WebGL, filters, cameras, particles
+      phaser-physics-specialist    -- Physics: Arcade, Matter, collisions, performance
+      phaser-ui-specialist         -- UI: text, bitmap text, DOM overlay, responsive UI
 ```
 
 ### Legend
