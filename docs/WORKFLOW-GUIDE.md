@@ -1440,7 +1440,11 @@ conflicts go to `producer`.
 
 ## Appendix B: Slash Command Quick-Reference
 
-### All 66 Commands by Category
+### Core 66 Commands by Category
+
+This quick-reference lists the core workflow commands. The full Claude adapter
+currently contains 72 skills, including maintenance and helper skills that are
+documented in `.claude/docs/skills-reference.md`.
 
 #### Onboarding and Navigation (5)
 

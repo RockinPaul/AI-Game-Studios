@@ -54,7 +54,6 @@ export_presets.cfg
 *.unityproj
 *.sln
 *.suo
-*.tmp
 *.user
 *.userprefs
 *.pidb
@@ -63,7 +62,6 @@ export_presets.cfg
 *.pdb
 *.mdb
 *.opendb
-*.VC.db
 crashlytics-buildid.txt
 sysinfo.txt
 # Uncomment if using Unity:
