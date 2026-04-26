@@ -25,7 +25,18 @@ Each engine gets its own directory:
     ├── rendering.md
     ├── physics.md
     └── ...
+
+phaser/
+├── VERSION.md
+├── breaking-changes.md
+├── deprecated-apis.md
+├── current-best-practices.md
+├── modules/
+└── skills/                 # Vendored official Phaser AI skills
 ```
+
+Official Phaser AI skills are vendored under
+`docs/engine-reference/phaser/skills/`.
 
 ## How Agents Use These Files
 
