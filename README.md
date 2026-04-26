@@ -235,9 +235,15 @@ This is **not** an auto-pilot system. Every agent follows a strict collaboration
 2. **Present options** — agents show 2-4 options with pros/cons
 3. **You decide** — the user always makes the call
 4. **Draft** — agents show work before finalizing
-5. **Approve** — nothing gets written without your sign-off
+5. **Approve** — nothing gets written without your sign-off unless you explicitly grant standing autonomy for the current scope
 
 You stay in control. The agents provide structure and expertise, not autonomy.
+
+If you explicitly grant autonomy for a task, session, or workflow stage, agents
+may proceed without repeated approval prompts inside that scope. This lets you
+say "act without approval for this implementation" while keeping safety stops for
+destructive actions, commits, pushes, deployments, credentials, ambiguous
+requirements, or conflicts with approved artifacts.
 
 ### Automated Safety
 

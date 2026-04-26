@@ -16,3 +16,7 @@ paths:
 - Design documents MUST be written incrementally: create skeleton first, then fill
   each section one at a time with user approval between sections. Write each
   approved section to the file immediately to persist decisions and manage context
+- If the user explicitly grants autonomy for the current task, session, or
+  workflow stage, that standing instruction satisfies the per-section approval
+  requirement. Still pause for unclear requirements or contradictions with
+  approved design artifacts

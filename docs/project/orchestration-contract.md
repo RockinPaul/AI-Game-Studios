@@ -18,9 +18,29 @@ The runtime can run separate agents in parallel and reconcile outputs later.
 
 1. **Scope the task clearly** -- objective, owned files, acceptance criteria.
 2. **Preserve boundaries** -- do not let two agents edit the same files in parallel.
-3. **Use approval gates** -- the user approves major decisions and file writes.
+3. **Use approval gates** -- the user approves major decisions and file writes unless a current user instruction explicitly grants autonomy for the requested scope.
 4. **Return explicit status** -- done, needs context, blocked, or concerns.
 5. **Review before closure** -- verify that outputs match the intended workflow step.
+
+## User-Granted Autonomy
+
+The user may waive repeated approval prompts for a session, workflow stage, or
+named task by giving an explicit instruction such as "act without asking for
+approval", "implement end to end", or "you may write files as needed". When this
+instruction is active, approval gates across all stages are treated as satisfied
+for work inside the stated scope.
+
+Autonomy does not remove the need to stop for:
+
+- unclear requirements where choosing wrong would change product direction
+- destructive or hard-to-reverse operations
+- commits, pushes, releases, deployments, purchases, or external service changes
+  unless the user explicitly includes them
+- security-sensitive changes or credential handling
+- conflicts with already approved design, architecture, or domain ownership
+
+When acting under user-granted autonomy, agents should still report what changed,
+what was verified, and any residual risks before closure.
 
 ## Parallelism Rule
 

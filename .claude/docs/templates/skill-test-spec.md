@@ -15,7 +15,7 @@ Verified automatically by `/skill-test static` — no fixture needed.
 - [ ] Has required frontmatter fields: `name`, `description`, `argument-hint`, `user-invocable`, `allowed-tools`
 - [ ] Has ≥2 phase headings (## Phase N or numbered ## sections)
 - [ ] Contains verdict keywords: [list the ones expected, e.g., PASS, FAIL, CONCERNS]
-- [ ] Contains "May I write" collaborative protocol language (if skill writes files)
+- [ ] Contains "May I write" collaborative protocol language or a documented user-granted autonomy override (if skill writes files)
 - [ ] Has a next-step handoff at the end
 
 ---
@@ -39,7 +39,7 @@ systems-index.md exists. All MVP GDDs are present and individually reviewed."]
 - [ ] Skill reads [specific file] before producing output
 - [ ] Output includes verdict keyword [PASS/FAIL/etc.]
 - [ ] Output lists [specific content] from the fixture
-- [ ] Skill asks for approval before writing any file
+- [ ] Skill asks for approval before writing any file unless user-granted autonomy is active
 
 ---
 
@@ -59,7 +59,7 @@ No files exist in design/gdd/."]
 - [ ] Skill does NOT output PASS when the fixture is incomplete
 - [ ] Skill names the specific missing artifact
 - [ ] Skill suggests a remediation action (e.g., "Run /[other-skill]")
-- [ ] Skill does not create files to fill in the gap without asking
+- [ ] Skill does not create files to fill in the gap without asking unless user-granted autonomy is active and the remediation is inside scope
 
 ---
 
@@ -79,10 +79,10 @@ No files exist in design/gdd/."]
 
 ## Protocol Compliance
 
-- [ ] Uses "May I write" before all file writes
+- [ ] Uses "May I write" before all file writes unless user-granted autonomy is active
 - [ ] Presents findings or report before asking for write approval
 - [ ] Ends with a recommended next step or follow-up skill
-- [ ] Never auto-creates files without explicit user approval
+- [ ] Never auto-creates files without explicit user approval or user-granted autonomy for the current scope
 - [ ] Does not skip phases or jump straight to a verdict without checking
 
 ---

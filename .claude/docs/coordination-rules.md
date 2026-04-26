@@ -10,7 +10,20 @@
 4. **Change Propagation**: When a design change affects multiple domains, the
    `producer` agent coordinates the propagation.
 5. **No Unilateral Cross-Domain Changes**: An agent must never modify files
-   outside its designated directories without explicit delegation.
+   outside its designated directories without explicit delegation, user approval,
+   or a current user instruction granting autonomy for that scope.
+
+## User-Granted Autonomy
+
+If the user explicitly tells Claude Code to act without repeated approvals for a
+task, session, or workflow stage, agents may proceed through normal approval
+checkpoints across all stages inside that scope. Treat that instruction as
+standing approval for file writes and routine decisions covered by the request.
+
+This does not authorize destructive operations, commits, pushes, deployments,
+external purchases, credential changes, or major product-direction changes unless
+the user explicitly includes those actions. If requirements are ambiguous or an
+approved artifact would be contradicted, pause and surface the decision.
 
 ## Model Tier Assignment
 

@@ -6,7 +6,10 @@
 
 ## 🎯 Core Philosophy
 
-This agent architecture is designed for **USER-DRIVEN COLLABORATION**, not autonomous AI generation.
+This agent architecture is designed for **USER-DRIVEN COLLABORATION**, not
+unprompted autonomous AI generation. The user may explicitly grant autonomy for
+a task, session, or workflow stage; when they do, repeated approval prompts are
+waived inside that scope.
 
 ### ✅ The Right Model: Collaborative Consultant
 
@@ -20,12 +23,15 @@ Agents:
 - Explain trade-offs and reasoning
 - Draft proposals for review
 - Wait for user approval before writing
+- Act without repeated approvals when the user explicitly grants autonomy for
+  the current scope
 
 Users:
 - Make all creative and strategic decisions
 - Approve or reject agent suggestions
 - Direct the design vision
 - Sign off before anything is written to files
+- May give standing approval for a specific task, session, or workflow stage
 ```
 
 ### ❌ The Wrong Model: Autonomous Generator
@@ -33,9 +39,23 @@ Users:
 ```
 ❌ Agent creates design and writes it
 ❌ Agent makes decisions without user input
-❌ Agent writes code without approval
+❌ Agent writes code without approval or a user-granted autonomy instruction
 ❌ User just says "make a game" and waits
 ```
+
+### User-Granted Autonomy
+
+If the user says "act without approval", "implement end to end", "write files as
+needed", or gives an equivalent instruction, approval gates across all stages are
+treated as satisfied for the named scope. The agent should continue working
+through design, planning, implementation, verification, and documentation without
+asking for every file write or stage transition.
+
+This autonomy has safety limits. Agents must still pause for destructive or
+hard-to-reverse operations, commits, pushes, releases, deployments, purchases,
+credential or secret handling, unclear requirements that change product
+direction, or contradictions with already approved artifacts unless the user
+explicitly includes those actions.
 
 ---
 
@@ -365,7 +385,7 @@ pattern:
 
 ❌ **Don't use it for:**
 - Open-ended discovery questions ("What excites you about roguelikes?")
-- Single yes/no confirmations ("May I write to file?")
+- Single yes/no confirmations ("May I write to file?") unless autonomy is active
 - When running as a Task subagent (tool may not be available)
 
 ### Format Guidelines
@@ -671,8 +691,8 @@ WHEN proposing solutions:
 
 BEFORE writing files:
 1. Show draft or summary
-2. Explicitly ask: "May I write this to [file]?"
-3. Wait for "yes"
+2. Explicitly ask: "May I write this to [file]?" unless autonomy is active
+3. Wait for "yes" unless the user has already granted standing approval for this scope
 
 WHEN implementing:
 1. Explain architectural choices
