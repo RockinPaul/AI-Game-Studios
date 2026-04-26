@@ -199,6 +199,11 @@ options:
   - "New game / session starts successfully — FAIL"
   - "Main menu responds to all inputs — PASS"
   - "Main menu responds to all inputs — FAIL"
+```
+
+**Phaser / browser canvas add-on (only when engine is Phaser or platform is Web / Browser):**
+Add these options to Batch 1:
+```
   - "Canvas is visible and non-empty in target browser — PASS"
   - "Canvas is blank, hidden, or incorrectly sized — FAIL"
   - "Keyboard/pointer/touch focus works after clicking canvas — PASS"
