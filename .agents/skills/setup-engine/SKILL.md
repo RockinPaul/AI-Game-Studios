@@ -189,7 +189,7 @@ Update the Technology Stack section, replacing the `[CHOOSE]` placeholders with 
 
 After updating AGENTS.md, create or update `docs/project/technical-preferences.md` with
 engine-appropriate defaults. Then mirror the same populated content into
-`.Codex/docs/technical-preferences.md` so existing Codex adapter consumers keep
+`.claude/docs/technical-preferences.md` so existing Codex adapter consumers keep
 reading the same values until they are fully retargeted. Read the existing
 template first, then fill in:
 
