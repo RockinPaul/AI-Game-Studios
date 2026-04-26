@@ -87,3 +87,8 @@ Use the engine-specific role set that matches the current project.
 | `ue-replication-specialist` | Unreal | Balanced | `agents/engine/ue-replication-specialist.md` | Unreal replication, authority flow, multiplayer behavior |
 | `ue-umg-specialist` | Unreal | Balanced | `agents/engine/ue-umg-specialist.md` | UMG, HUD, Unreal UI architecture |
 | `ue-blueprint-specialist` | Unreal | Balanced | `agents/engine/ue-blueprint-specialist.md` | Blueprint architecture, Blueprint and C++ boundaries |
+| `phaser-specialist` | Phaser | Balanced | `agents/engine/phaser-specialist.md` | Phaser architecture, scene lifecycle, loader, browser deployment |
+| `phaser-typescript-specialist` | Phaser | Balanced | `agents/engine/phaser-typescript-specialist.md` | TypeScript scene code, module boundaries, Vitest-friendly logic |
+| `phaser-rendering-specialist` | Phaser | Balanced | `agents/engine/phaser-rendering-specialist.md` | WebGL, filters, post-fx, shaders, particles, cameras, atlases |
+| `phaser-physics-specialist` | Phaser | Balanced | `agents/engine/phaser-physics-specialist.md` | Arcade Physics, Matter Physics, collisions, physics performance |
+| `phaser-ui-specialist` | Phaser | Balanced | `agents/engine/phaser-ui-specialist.md` | Phaser text, bitmap text, DOM overlay, responsive UI, browser focus |
